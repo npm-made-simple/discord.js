@@ -109,10 +109,16 @@ class Client extends Discord.Client {
             try { await command.execute(this, interaction) }
             catch (err) {
                 console.error(err)
-                await interaction.reply({
-                    content: "There was an error while executing this command!",
-                    ephemeral: true
-                })
+                try {
+                    await interaction.reply({
+                        content: `There was an error while executing this command!\n\`\`\`${err}\`\`\``,
+                        ephemeral: true
+                    })
+                } catch (_) {
+                    await interaction.followUp({
+                        content: `There was an error while executing this command!\n\`\`\`${err}\`\`\``
+                    })
+                }
             }
         })
 

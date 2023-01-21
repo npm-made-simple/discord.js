@@ -1,6 +1,6 @@
 {
     "name": "simple-djs-framework",
-    "version": "1.5.0",
+    "version": "1.6.0",
     "main": "./index.js",
     "types": "./index.d.ts",
     "author": "alex* <31458482+alexasterisk@users.noreply.github.com>",
