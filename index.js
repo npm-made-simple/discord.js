@@ -54,6 +54,35 @@ class Client extends Discord.Client {
     }
 
     addCommand(name, data) {
+        if (!data.builder) {
+            data.builder = new Discord.SlashCommandBuilder()
+                .setName(name)
+                .setDescription(data.description)
+
+            if (data.args) {
+                for (const arg of data.args) {
+                    let type = arg.type ?? "string"
+                    try {
+                        const argBuilder = data.builder[`add${type[0].toUpperCase() + type.slice(1)}Option`](o => o.setName(arg.name)
+                            .setDescription(arg.description)
+                            .setRequired(arg.required ?? false))
+                        for (const key in arg) {
+                            if (key === "type") continue
+                            if (key === "name") continue
+                            if (key === "description") continue
+                            if (key === "required") continue
+                            argBuilder[`set${key[0].toUpperCase() + key.slice(1)}`](arg[key])
+                        }
+                    } catch (err) {
+                        console.error(`Invalid argument type: ${type}`)
+                    }
+                }
+            }
+        }
+
+        if (data.allowedInDMs !== undefined) data.builder.setDefaultPermission(data.allowedInDMs)
+        if (data.permissionsRequired !== undefined) data.builder.setDefaultMemberPermission(data.permissionsRequired)
+
         this._commands.set(name, data)
     }
 
@@ -90,10 +119,17 @@ class Client extends Discord.Client {
                     try { await subcommandData.execute(client, interaction) }
                     catch (err) {
                         console.error(err)
-                        await interaction.reply({
-                            content: "There was an error while executing this command!",
-                            ephemeral: true
-                        })
+                        try { await interaction.reply({
+                                content: `There was an error while executing this command!\n\`\`\`${err}\`\`\``,
+                                ephemeral: true
+                        })} catch (_) { try { await interaction.editReply({
+                                content: `There was an error while executing this command!\n\`\`\`${err}\`\`\``,
+                            })} catch (_) { try { await interaction.followUp({
+                                    content: `There was an error while executing this command!\n\`\`\`${err}\`\`\``,
+                                    ephemeral: true
+                                })} catch (_) { interaction.channel.send(`There was an error while executing this command!\n\`\`\`${err}\`\`\``) }
+                            }
+                        }
                     }
                 }
                 this.addCommand(file, command)
@@ -109,15 +145,16 @@ class Client extends Discord.Client {
             try { await command.execute(this, interaction) }
             catch (err) {
                 console.error(err)
-                try {
-                    await interaction.reply({
+                try { await interaction.reply({
                         content: `There was an error while executing this command!\n\`\`\`${err}\`\`\``,
                         ephemeral: true
-                    })
-                } catch (_) {
-                    await interaction.followUp({
-                        content: `There was an error while executing this command!\n\`\`\`${err}\`\`\``
-                    })
+                })} catch (_) { try { await interaction.editReply({
+                        content: `There was an error while executing this command!\n\`\`\`${err}\`\`\``,
+                    })} catch (_) { try { await interaction.followUp({
+                            content: `There was an error while executing this command!\n\`\`\`${err}\`\`\``,
+                            ephemeral: true
+                        })} catch (_) { interaction.channel.send(`There was an error while executing this command!\n\`\`\`${err}\`\`\``) }
+                    }
                 }
             }
         })

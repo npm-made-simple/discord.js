@@ -22,10 +22,22 @@ export class Client extends DiscordClient<boolean> {
 }
 export default Client;
 
+export interface Argument {
+    name: string;
+    type: "attachment" | "boolean" | "channel" | "integer" | "mentionable" | "number" | "role" | "string" | "user";
+    description: string;
+    required?: boolean;
+    [key: string]: any;
+}
+
 export interface Command {
     name?: string;
     description: string;
-    builder: SlashCommandBuilder,
+    args?: Argument[];
+    allowedInDMS?: boolean;
+    permissionsRequired?: number;
+    required?: boolean;
+    builder?: SlashCommandBuilder,
     execute: (client: Client, interaction: ChatInputCommandInteraction) => any;
 }
 

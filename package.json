@@ -1,6 +1,6 @@
 {
     "name": "simple-djs-framework",
-    "version": "1.6.0",
+    "version": "2.0.0",
     "main": "./index.js",
     "types": "./index.d.ts",
     "author": "alex* <31458482+alexasterisk@users.noreply.github.com>",
@@ -11,5 +11,13 @@
     "dependencies": {
         "callsite": "1.0.0",
         "discord.js": "^14.7.1"
-    }
+    },
+    "keywords": [
+        "discord.js",
+        "discord",
+        "discord bot",
+        "framework",
+        "djs",
+        "simple"
+    ]
 }
