@@ -1,0 +1,871 @@
+{
+  "name": "simple-djs-framework",
+  "version": "2.1.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "simple-djs-framework",
+      "version": "2.1.0",
+      "license": "MIT",
+      "dependencies": {
+        "callsite": "1.0.0",
+        "discord.js": "^14.11.0"
+      },
+      "devDependencies": {
+        "@types/callsite": "^1.0.31",
+        "tslib": "^2.5.0"
+      },
+      "engines": {
+        "node": ">=16.0.0"
+      }
+    },
+    "node_modules/.pnpm": {},
+    "node_modules/.pnpm/@discordjs+builders@1.6.3": {},
+    "node_modules/.pnpm/@discordjs+builders@1.6.3/node_modules/@discordjs/builders": {
+      "version": "1.6.3",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@discordjs/formatters": "^0.3.1",
+        "@discordjs/util": "^0.3.1",
+        "@sapphire/shapeshift": "^3.8.2",
+        "discord-api-types": "^0.37.41",
+        "fast-deep-equal": "^3.1.3",
+        "ts-mixer": "^6.0.3",
+        "tslib": "^2.5.0"
+      },
+      "engines": {
+        "node": ">=16.9.0"
+      }
+    },
+    "node_modules/.pnpm/@discordjs+builders@1.6.3/node_modules/@discordjs/formatters": {
+      "resolved": "node_modules/.pnpm/@discordjs+formatters@0.3.1/node_modules/@discordjs/formatters",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+builders@1.6.3/node_modules/@discordjs/util": {
+      "resolved": "node_modules/.pnpm/@discordjs+util@0.3.1/node_modules/@discordjs/util",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+builders@1.6.3/node_modules/@sapphire/shapeshift": {
+      "resolved": "node_modules/.pnpm/@sapphire+shapeshift@3.8.2/node_modules/@sapphire/shapeshift",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+builders@1.6.3/node_modules/discord-api-types": {
+      "resolved": "node_modules/.pnpm/discord-api-types@0.37.42/node_modules/discord-api-types",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+builders@1.6.3/node_modules/fast-deep-equal": {
+      "resolved": "node_modules/.pnpm/fast-deep-equal@3.1.3/node_modules/fast-deep-equal",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+builders@1.6.3/node_modules/ts-mixer": {
+      "resolved": "node_modules/.pnpm/ts-mixer@6.0.3/node_modules/ts-mixer",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+builders@1.6.3/node_modules/tslib": {
+      "resolved": "node_modules/.pnpm/tslib@2.5.0/node_modules/tslib",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+collection@1.5.1/node_modules/@discordjs/collection": {
+      "version": "1.5.1",
+      "license": "Apache-2.0",
+      "devDependencies": {
+        "@favware/cliff-jumper": "^2.0.0",
+        "@microsoft/api-extractor": "^7.34.6",
+        "@types/node": "16.18.25",
+        "@vitest/coverage-c8": "^0.30.1",
+        "cross-env": "^7.0.3",
+        "esbuild-plugin-version-injector": "^1.1.0",
+        "eslint": "^8.39.0",
+        "eslint-config-neon": "^0.1.42",
+        "eslint-formatter-pretty": "^5.0.0",
+        "prettier": "^2.8.8",
+        "tsup": "^6.7.0",
+        "typescript": "^5.0.4",
+        "vitest": "^0.29.8"
+      },
+      "engines": {
+        "node": ">=16.9.0"
+      }
+    },
+    "node_modules/.pnpm/@discordjs+formatters@0.3.1": {},
+    "node_modules/.pnpm/@discordjs+formatters@0.3.1/node_modules/@discordjs/formatters": {
+      "version": "0.3.1",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "discord-api-types": "^0.37.41"
+      },
+      "engines": {
+        "node": ">=16.9.0"
+      }
+    },
+    "node_modules/.pnpm/@discordjs+formatters@0.3.1/node_modules/discord-api-types": {
+      "resolved": "node_modules/.pnpm/discord-api-types@0.37.42/node_modules/discord-api-types",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+rest@1.7.1": {},
+    "node_modules/.pnpm/@discordjs+rest@1.7.1/node_modules/@discordjs/collection": {
+      "resolved": "node_modules/.pnpm/@discordjs+collection@1.5.1/node_modules/@discordjs/collection",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+rest@1.7.1/node_modules/@discordjs/rest": {
+      "version": "1.7.1",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@discordjs/collection": "^1.5.1",
+        "@discordjs/util": "^0.3.0",
+        "@sapphire/async-queue": "^1.5.0",
+        "@sapphire/snowflake": "^3.4.2",
+        "discord-api-types": "^0.37.41",
+        "file-type": "^18.3.0",
+        "tslib": "^2.5.0",
+        "undici": "^5.22.0"
+      },
+      "engines": {
+        "node": ">=16.9.0"
+      }
+    },
+    "node_modules/.pnpm/@discordjs+rest@1.7.1/node_modules/@discordjs/util": {
+      "resolved": "node_modules/.pnpm/@discordjs+util@0.3.1/node_modules/@discordjs/util",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+rest@1.7.1/node_modules/@sapphire/async-queue": {
+      "resolved": "node_modules/.pnpm/@sapphire+async-queue@1.5.0/node_modules/@sapphire/async-queue",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+rest@1.7.1/node_modules/@sapphire/snowflake": {
+      "resolved": "node_modules/.pnpm/@sapphire+snowflake@3.4.2/node_modules/@sapphire/snowflake",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+rest@1.7.1/node_modules/discord-api-types": {
+      "resolved": "node_modules/.pnpm/discord-api-types@0.37.42/node_modules/discord-api-types",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+rest@1.7.1/node_modules/file-type": {
+      "resolved": "node_modules/.pnpm/file-type@18.3.0/node_modules/file-type",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+rest@1.7.1/node_modules/tslib": {
+      "resolved": "node_modules/.pnpm/tslib@2.5.0/node_modules/tslib",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+rest@1.7.1/node_modules/undici": {
+      "resolved": "node_modules/.pnpm/undici@5.22.0/node_modules/undici",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+util@0.3.1/node_modules/@discordjs/util": {
+      "version": "0.3.1",
+      "license": "Apache-2.0",
+      "devDependencies": {
+        "@favware/cliff-jumper": "^2.0.0",
+        "@microsoft/api-extractor": "^7.34.6",
+        "@types/node": "16.18.25",
+        "@vitest/coverage-c8": "^0.30.1",
+        "cross-env": "^7.0.3",
+        "eslint": "^8.39.0",
+        "eslint-config-neon": "^0.1.42",
+        "eslint-formatter-pretty": "^5.0.0",
+        "prettier": "^2.8.8",
+        "tsd": "^0.28.1",
+        "tsup": "^6.7.0",
+        "typescript": "^5.0.4",
+        "vitest": "^0.29.8"
+      },
+      "engines": {
+        "node": ">=16.9.0"
+      }
+    },
+    "node_modules/.pnpm/@discordjs+ws@0.8.3": {},
+    "node_modules/.pnpm/@discordjs+ws@0.8.3/node_modules/@discordjs/collection": {
+      "resolved": "node_modules/.pnpm/@discordjs+collection@1.5.1/node_modules/@discordjs/collection",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+ws@0.8.3/node_modules/@discordjs/rest": {
+      "resolved": "node_modules/.pnpm/@discordjs+rest@1.7.1/node_modules/@discordjs/rest",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+ws@0.8.3/node_modules/@discordjs/util": {
+      "resolved": "node_modules/.pnpm/@discordjs+util@0.3.1/node_modules/@discordjs/util",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+ws@0.8.3/node_modules/@discordjs/ws": {
+      "version": "0.8.3",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@discordjs/collection": "^1.5.1",
+        "@discordjs/rest": "^1.7.1",
+        "@discordjs/util": "^0.3.1",
+        "@sapphire/async-queue": "^1.5.0",
+        "@types/ws": "^8.5.4",
+        "@vladfrangu/async_event_emitter": "^2.2.1",
+        "discord-api-types": "^0.37.41",
+        "tslib": "^2.5.0",
+        "ws": "^8.13.0"
+      },
+      "engines": {
+        "node": ">=16.9.0"
+      }
+    },
+    "node_modules/.pnpm/@discordjs+ws@0.8.3/node_modules/@sapphire/async-queue": {
+      "resolved": "node_modules/.pnpm/@sapphire+async-queue@1.5.0/node_modules/@sapphire/async-queue",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+ws@0.8.3/node_modules/@types/ws": {
+      "resolved": "node_modules/.pnpm/@types+ws@8.5.4/node_modules/@types/ws",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+ws@0.8.3/node_modules/@vladfrangu/async_event_emitter": {
+      "resolved": "node_modules/.pnpm/@vladfrangu+async_event_emitter@2.2.1/node_modules/@vladfrangu/async_event_emitter",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+ws@0.8.3/node_modules/discord-api-types": {
+      "resolved": "node_modules/.pnpm/discord-api-types@0.37.42/node_modules/discord-api-types",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+ws@0.8.3/node_modules/tslib": {
+      "resolved": "node_modules/.pnpm/tslib@2.5.0/node_modules/tslib",
+      "link": true
+    },
+    "node_modules/.pnpm/@discordjs+ws@0.8.3/node_modules/ws": {
+      "resolved": "node_modules/.pnpm/ws@8.13.0/node_modules/ws",
+      "link": true
+    },
+    "node_modules/.pnpm/@sapphire+async-queue@1.5.0/node_modules/@sapphire/async-queue": {
+      "version": "1.5.0",
+      "license": "MIT",
+      "devDependencies": {
+        "@favware/cliff-jumper": "^1.8.6",
+        "@vitest/coverage-c8": "^0.22.0",
+        "c8": "^7.12.0",
+        "tsup": "^6.2.2",
+        "typescript": "^4.7.4",
+        "vitest": "^0.22.0"
+      },
+      "engines": {
+        "node": ">=v14.0.0",
+        "npm": ">=7.0.0"
+      }
+    },
+    "node_modules/.pnpm/@sapphire+shapeshift@3.8.2": {},
+    "node_modules/.pnpm/@sapphire+shapeshift@3.8.2/node_modules/@sapphire/shapeshift": {
+      "version": "3.8.2",
+      "license": "MIT",
+      "dependencies": {
+        "fast-deep-equal": "^3.1.3",
+        "lodash": "^4.17.21"
+      },
+      "engines": {
+        "node": ">=v14.0.0",
+        "npm": ">=7.0.0"
+      }
+    },
+    "node_modules/.pnpm/@sapphire+shapeshift@3.8.2/node_modules/fast-deep-equal": {
+      "resolved": "node_modules/.pnpm/fast-deep-equal@3.1.3/node_modules/fast-deep-equal",
+      "link": true
+    },
+    "node_modules/.pnpm/@sapphire+shapeshift@3.8.2/node_modules/lodash": {
+      "resolved": "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash",
+      "link": true
+    },
+    "node_modules/.pnpm/@sapphire+snowflake@3.4.2/node_modules/@sapphire/snowflake": {
+      "version": "3.4.2",
+      "license": "MIT",
+      "devDependencies": {
+        "@favware/cliff-jumper": "^2.0.0",
+        "@vitest/coverage-c8": "^0.29.8",
+        "tsup": "^6.7.0",
+        "typedoc": "0.23.28",
+        "typedoc-json-parser": "^7.2.0",
+        "typescript": "^5.0.4",
+        "vitest": "^0.29.8"
+      },
+      "engines": {
+        "node": ">=v14.0.0",
+        "npm": ">=7.0.0"
+      }
+    },
+    "node_modules/.pnpm/@tokenizer+token@0.3.0/node_modules/@tokenizer/token": {
+      "version": "0.3.0",
+      "license": "MIT",
+      "devDependencies": {
+        "@types/node": "^13.1.0"
+      }
+    },
+    "node_modules/.pnpm/@types+callsite@1.0.31/node_modules/@types/callsite": {
+      "version": "1.0.31",
+      "dev": true,
+      "license": "MIT"
+    },
+    "node_modules/.pnpm/@types+node@20.1.1/node_modules/@types/node": {
+      "version": "20.1.1",
+      "dev": true,
+      "license": "MIT"
+    },
+    "node_modules/.pnpm/@types+ws@8.5.4": {},
+    "node_modules/.pnpm/@types+ws@8.5.4/node_modules/@types/node": {
+      "resolved": "node_modules/.pnpm/@types+node@20.1.1/node_modules/@types/node",
+      "link": true
+    },
+    "node_modules/.pnpm/@types+ws@8.5.4/node_modules/@types/ws": {
+      "version": "8.5.4",
+      "license": "MIT",
+      "dependencies": {
+        "@types/node": "*"
+      }
+    },
+    "node_modules/.pnpm/@vladfrangu+async_event_emitter@2.2.1/node_modules/@vladfrangu/async_event_emitter": {
+      "version": "2.2.1",
+      "license": "MIT",
+      "devDependencies": {
+        "@commitlint/cli": "^17.4.4",
+        "@commitlint/config-conventional": "^17.4.4",
+        "@favware/cliff-jumper": "^1.10.0",
+        "@favware/npm-deprecate": "^1.0.7",
+        "@favware/rollup-type-bundler": "^2.0.0",
+        "@sapphire/eslint-config": "^4.3.8",
+        "@sapphire/prettier-config": "^1.4.5",
+        "@sapphire/ts-config": "^3.3.4",
+        "@typescript-eslint/eslint-plugin": "^5.52.0",
+        "@typescript-eslint/parser": "^5.52.0",
+        "@vitest/coverage-c8": "^0.28.5",
+        "cz-conventional-changelog": "^3.3.0",
+        "eslint": "^8.34.0",
+        "eslint-config-prettier": "^8.6.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "husky": "^8.0.3",
+        "lint-staged": "^13.1.2",
+        "pinst": "^3.0.0",
+        "prettier": "^2.8.4",
+        "pretty-quick": "^3.1.3",
+        "tsup": "^6.6.3",
+        "typedoc": "^0.23.25",
+        "typedoc-plugin-mdn-links": "^2.0.2",
+        "typescript": "^4.9.5",
+        "vitest": "^0.28.5"
+      },
+      "engines": {
+        "node": ">=v14.0.0",
+        "npm": ">=7.0.0"
+      }
+    },
+    "node_modules/.pnpm/busboy@1.6.0": {},
+    "node_modules/.pnpm/busboy@1.6.0/node_modules/busboy": {
+      "version": "1.6.0",
+      "dependencies": {
+        "streamsearch": "^1.1.0"
+      },
+      "engines": {
+        "node": ">=10.16.0"
+      }
+    },
+    "node_modules/.pnpm/busboy@1.6.0/node_modules/streamsearch": {
+      "resolved": "node_modules/.pnpm/streamsearch@1.1.0/node_modules/streamsearch",
+      "link": true
+    },
+    "node_modules/.pnpm/callsite@1.0.0/node_modules/callsite": {
+      "version": "1.0.0",
+      "devDependencies": {
+        "mocha": "*",
+        "should": "*"
+      },
+      "engines": {
+        "node": "*"
+      }
+    },
+    "node_modules/.pnpm/discord-api-types@0.37.42/node_modules/discord-api-types": {
+      "version": "0.37.42",
+      "license": "MIT",
+      "devDependencies": {
+        "@babel/runtime-corejs3": "^7.18.0",
+        "@commitlint/cli": "^17.0.0",
+        "@commitlint/config-angular": "^17.0.0",
+        "@favware/npm-deprecate": "^1.0.4",
+        "@octokit/action": "^3.18.1",
+        "@octokit/webhooks-types": "^5.6.0",
+        "@sapphire/prettier-config": "^1.4.3",
+        "@types/conventional-recommended-bump": "^6.1.0",
+        "@types/node": "^17.0.35",
+        "@typescript-eslint/utils": "^5.53.0",
+        "conventional-changelog-cli": "^2.2.2",
+        "conventional-recommended-bump": "^6.1.0",
+        "eslint": "^8.16.0",
+        "eslint-config-neon": "^0.1.42",
+        "eslint-import-resolver-typescript": "^2.7.1",
+        "eslint-plugin-local": "^1.0.0",
+        "gen-esm-wrapper": "^1.1.3",
+        "husky": "^8.0.1",
+        "is-ci": "^3.0.1",
+        "lint-staged": "^13.2.1",
+        "npm-run-all": "^4.1.5",
+        "prettier": "^2.6.2",
+        "pretty-quick": "^3.1.3",
+        "rimraf": "^3.0.2",
+        "tsd": "^0.25.0",
+        "tsutils": "^3.21.0",
+        "typescript": "^4.9.5"
+      }
+    },
+    "node_modules/.pnpm/discord.js@14.11.0": {},
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/@discordjs/builders": {
+      "resolved": "node_modules/.pnpm/@discordjs+builders@1.6.3/node_modules/@discordjs/builders",
+      "link": true
+    },
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/@discordjs/collection": {
+      "resolved": "node_modules/.pnpm/@discordjs+collection@1.5.1/node_modules/@discordjs/collection",
+      "link": true
+    },
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/@discordjs/formatters": {
+      "resolved": "node_modules/.pnpm/@discordjs+formatters@0.3.1/node_modules/@discordjs/formatters",
+      "link": true
+    },
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/@discordjs/rest": {
+      "resolved": "node_modules/.pnpm/@discordjs+rest@1.7.1/node_modules/@discordjs/rest",
+      "link": true
+    },
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/@discordjs/util": {
+      "resolved": "node_modules/.pnpm/@discordjs+util@0.3.1/node_modules/@discordjs/util",
+      "link": true
+    },
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/@discordjs/ws": {
+      "resolved": "node_modules/.pnpm/@discordjs+ws@0.8.3/node_modules/@discordjs/ws",
+      "link": true
+    },
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/@sapphire/snowflake": {
+      "resolved": "node_modules/.pnpm/@sapphire+snowflake@3.4.2/node_modules/@sapphire/snowflake",
+      "link": true
+    },
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/@types/ws": {
+      "resolved": "node_modules/.pnpm/@types+ws@8.5.4/node_modules/@types/ws",
+      "link": true
+    },
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/discord-api-types": {
+      "resolved": "node_modules/.pnpm/discord-api-types@0.37.42/node_modules/discord-api-types",
+      "link": true
+    },
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/discord.js": {
+      "version": "14.11.0",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@discordjs/builders": "^1.6.3",
+        "@discordjs/collection": "^1.5.1",
+        "@discordjs/formatters": "^0.3.1",
+        "@discordjs/rest": "^1.7.1",
+        "@discordjs/util": "^0.3.1",
+        "@discordjs/ws": "^0.8.3",
+        "@sapphire/snowflake": "^3.4.2",
+        "@types/ws": "^8.5.4",
+        "discord-api-types": "^0.37.41",
+        "fast-deep-equal": "^3.1.3",
+        "lodash.snakecase": "^4.1.1",
+        "tslib": "^2.5.0",
+        "undici": "^5.22.0",
+        "ws": "^8.13.0"
+      },
+      "engines": {
+        "node": ">=16.9.0"
+      }
+    },
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/fast-deep-equal": {
+      "resolved": "node_modules/.pnpm/fast-deep-equal@3.1.3/node_modules/fast-deep-equal",
+      "link": true
+    },
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/lodash.snakecase": {
+      "resolved": "node_modules/.pnpm/lodash.snakecase@4.1.1/node_modules/lodash.snakecase",
+      "link": true
+    },
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/tslib": {
+      "resolved": "node_modules/.pnpm/tslib@2.5.0/node_modules/tslib",
+      "link": true
+    },
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/undici": {
+      "resolved": "node_modules/.pnpm/undici@5.22.0/node_modules/undici",
+      "link": true
+    },
+    "node_modules/.pnpm/discord.js@14.11.0/node_modules/ws": {
+      "resolved": "node_modules/.pnpm/ws@8.13.0/node_modules/ws",
+      "link": true
+    },
+    "node_modules/.pnpm/fast-deep-equal@3.1.3/node_modules/fast-deep-equal": {
+      "version": "3.1.3",
+      "license": "MIT",
+      "devDependencies": {
+        "coveralls": "^3.1.0",
+        "dot": "^1.1.2",
+        "eslint": "^7.2.0",
+        "mocha": "^7.2.0",
+        "nyc": "^15.1.0",
+        "pre-commit": "^1.2.2",
+        "react": "^16.12.0",
+        "react-test-renderer": "^16.12.0",
+        "sinon": "^9.0.2",
+        "typescript": "^3.9.5"
+      }
+    },
+    "node_modules/.pnpm/file-type@18.3.0": {},
+    "node_modules/.pnpm/file-type@18.3.0/node_modules/file-type": {
+      "version": "18.3.0",
+      "license": "MIT",
+      "dependencies": {
+        "readable-web-to-node-stream": "^3.0.2",
+        "strtok3": "^7.0.0",
+        "token-types": "^5.0.1"
+      },
+      "engines": {
+        "node": ">=14.16"
+      },
+      "funding": {
+        "url": "https://github.com/sindresorhus/file-type?sponsor=1"
+      }
+    },
+    "node_modules/.pnpm/file-type@18.3.0/node_modules/readable-web-to-node-stream": {
+      "resolved": "node_modules/.pnpm/readable-web-to-node-stream@3.0.2/node_modules/readable-web-to-node-stream",
+      "link": true
+    },
+    "node_modules/.pnpm/file-type@18.3.0/node_modules/strtok3": {
+      "resolved": "node_modules/.pnpm/strtok3@7.0.0/node_modules/strtok3",
+      "link": true
+    },
+    "node_modules/.pnpm/file-type@18.3.0/node_modules/token-types": {
+      "resolved": "node_modules/.pnpm/token-types@5.0.1/node_modules/token-types",
+      "link": true
+    },
+    "node_modules/.pnpm/ieee754@1.2.1/node_modules/ieee754": {
+      "version": "1.2.1",
+      "funding": [
+        {
+          "type": "github",
+          "url": "https://github.com/sponsors/feross"
+        },
+        {
+          "type": "patreon",
+          "url": "https://www.patreon.com/feross"
+        },
+        {
+          "type": "consulting",
+          "url": "https://feross.org/support"
+        }
+      ],
+      "license": "BSD-3-Clause",
+      "devDependencies": {
+        "airtap": "^3.0.0",
+        "standard": "*",
+        "tape": "^5.0.1"
+      }
+    },
+    "node_modules/.pnpm/inherits@2.0.4/node_modules/inherits": {
+      "version": "2.0.4",
+      "license": "ISC",
+      "devDependencies": {
+        "tap": "^14.2.4"
+      }
+    },
+    "node_modules/.pnpm/lodash.snakecase@4.1.1/node_modules/lodash.snakecase": {
+      "version": "4.1.1",
+      "license": "MIT"
+    },
+    "node_modules/.pnpm/lodash@4.17.21/node_modules/lodash": {
+      "version": "4.17.21",
+      "license": "MIT"
+    },
+    "node_modules/.pnpm/node_modules/@tokenizer/token": {
+      "resolved": "node_modules/.pnpm/@tokenizer+token@0.3.0/node_modules/@tokenizer/token",
+      "link": true
+    },
+    "node_modules/.pnpm/node_modules/@types/node": {
+      "resolved": "node_modules/.pnpm/@types+node@20.1.1/node_modules/@types/node",
+      "link": true
+    },
+    "node_modules/.pnpm/node_modules/inherits": {
+      "resolved": "node_modules/.pnpm/inherits@2.0.4/node_modules/inherits",
+      "link": true
+    },
+    "node_modules/.pnpm/node_modules/token-types": {
+      "resolved": "node_modules/.pnpm/token-types@5.0.1/node_modules/token-types",
+      "link": true
+    },
+    "node_modules/.pnpm/node_modules/tslib": {
+      "resolved": "node_modules/.pnpm/tslib@2.5.0/node_modules/tslib",
+      "link": true
+    },
+    "node_modules/.pnpm/node_modules/undici": {
+      "resolved": "node_modules/.pnpm/undici@5.22.0/node_modules/undici",
+      "link": true
+    },
+    "node_modules/.pnpm/node_modules/ws": {
+      "resolved": "node_modules/.pnpm/ws@8.13.0/node_modules/ws",
+      "link": true
+    },
+    "node_modules/.pnpm/peek-readable@5.0.0/node_modules/peek-readable": {
+      "version": "5.0.0",
+      "license": "MIT",
+      "devDependencies": {
+        "@types/chai": "^4.3.1",
+        "@types/mocha": "^9.1.1",
+        "@types/node": "^18.6.3",
+        "@typescript-eslint/eslint-plugin": "^4.33.0",
+        "@typescript-eslint/parser": "^4.33.0",
+        "c8": "^7.12.0",
+        "chai": "^4.3.6",
+        "coveralls": "^3.1.1",
+        "del-cli": "^5.0.0",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-import-resolver-typescript": "^3.4.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-jsdoc": "^39.3.4",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-unicorn": "^40.1.0",
+        "mocha": "^10.0.0",
+        "remark-cli": "^11.0.0",
+        "remark-preset-lint-recommended": "^6.1.2",
+        "ts-node": "^10.9.1",
+        "typescript": "^4.7.4"
+      },
+      "engines": {
+        "node": ">=14.16"
+      },
+      "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/Borewit"
+      }
+    },
+    "node_modules/.pnpm/readable-stream@3.6.2": {},
+    "node_modules/.pnpm/readable-stream@3.6.2/node_modules/inherits": {
+      "resolved": "node_modules/.pnpm/inherits@2.0.4/node_modules/inherits",
+      "link": true
+    },
+    "node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream": {
+      "version": "3.6.2",
+      "license": "MIT",
+      "dependencies": {
+        "inherits": "^2.0.3",
+        "string_decoder": "^1.1.1",
+        "util-deprecate": "^1.0.1"
+      },
+      "engines": {
+        "node": ">= 6"
+      }
+    },
+    "node_modules/.pnpm/readable-stream@3.6.2/node_modules/string_decoder": {
+      "resolved": "node_modules/.pnpm/string_decoder@1.3.0/node_modules/string_decoder",
+      "link": true
+    },
+    "node_modules/.pnpm/readable-stream@3.6.2/node_modules/util-deprecate": {
+      "resolved": "node_modules/.pnpm/util-deprecate@1.0.2/node_modules/util-deprecate",
+      "link": true
+    },
+    "node_modules/.pnpm/readable-web-to-node-stream@3.0.2": {},
+    "node_modules/.pnpm/readable-web-to-node-stream@3.0.2/node_modules/readable-stream": {
+      "resolved": "node_modules/.pnpm/readable-stream@3.6.2/node_modules/readable-stream",
+      "link": true
+    },
+    "node_modules/.pnpm/readable-web-to-node-stream@3.0.2/node_modules/readable-web-to-node-stream": {
+      "version": "3.0.2",
+      "license": "MIT",
+      "dependencies": {
+        "readable-stream": "^3.6.0"
+      },
+      "engines": {
+        "node": ">=8"
+      },
+      "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/Borewit"
+      }
+    },
+    "node_modules/.pnpm/safe-buffer@5.2.1/node_modules/safe-buffer": {
+      "version": "5.2.1",
+      "funding": [
+        {
+          "type": "github",
+          "url": "https://github.com/sponsors/feross"
+        },
+        {
+          "type": "patreon",
+          "url": "https://www.patreon.com/feross"
+        },
+        {
+          "type": "consulting",
+          "url": "https://feross.org/support"
+        }
+      ],
+      "license": "MIT",
+      "devDependencies": {
+        "standard": "*",
+        "tape": "^5.0.0"
+      }
+    },
+    "node_modules/.pnpm/streamsearch@1.1.0/node_modules/streamsearch": {
+      "version": "1.1.0",
+      "devDependencies": {
+        "@mscdex/eslint-config": "^1.1.0",
+        "eslint": "^7.32.0"
+      },
+      "engines": {
+        "node": ">=10.0.0"
+      }
+    },
+    "node_modules/.pnpm/string_decoder@1.3.0": {},
+    "node_modules/.pnpm/string_decoder@1.3.0/node_modules/safe-buffer": {
+      "resolved": "node_modules/.pnpm/safe-buffer@5.2.1/node_modules/safe-buffer",
+      "link": true
+    },
+    "node_modules/.pnpm/string_decoder@1.3.0/node_modules/string_decoder": {
+      "version": "1.3.0",
+      "license": "MIT",
+      "dependencies": {
+        "safe-buffer": "~5.2.0"
+      }
+    },
+    "node_modules/.pnpm/strtok3@7.0.0": {},
+    "node_modules/.pnpm/strtok3@7.0.0/node_modules/@tokenizer/token": {
+      "resolved": "node_modules/.pnpm/@tokenizer+token@0.3.0/node_modules/@tokenizer/token",
+      "link": true
+    },
+    "node_modules/.pnpm/strtok3@7.0.0/node_modules/peek-readable": {
+      "resolved": "node_modules/.pnpm/peek-readable@5.0.0/node_modules/peek-readable",
+      "link": true
+    },
+    "node_modules/.pnpm/strtok3@7.0.0/node_modules/strtok3": {
+      "version": "7.0.0",
+      "license": "MIT",
+      "dependencies": {
+        "@tokenizer/token": "^0.3.0",
+        "peek-readable": "^5.0.0"
+      },
+      "engines": {
+        "node": ">=14.16"
+      },
+      "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/Borewit"
+      }
+    },
+    "node_modules/.pnpm/token-types@5.0.1": {},
+    "node_modules/.pnpm/token-types@5.0.1/node_modules/@tokenizer/token": {
+      "resolved": "node_modules/.pnpm/@tokenizer+token@0.3.0/node_modules/@tokenizer/token",
+      "link": true
+    },
+    "node_modules/.pnpm/token-types@5.0.1/node_modules/ieee754": {
+      "resolved": "node_modules/.pnpm/ieee754@1.2.1/node_modules/ieee754",
+      "link": true
+    },
+    "node_modules/.pnpm/token-types@5.0.1/node_modules/token-types": {
+      "version": "5.0.1",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@tokenizer/token": "^0.3.0",
+        "ieee754": "^1.2.1"
+      },
+      "engines": {
+        "node": ">=14.16"
+      },
+      "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/Borewit"
+      }
+    },
+    "node_modules/.pnpm/ts-mixer@6.0.3/node_modules/ts-mixer": {
+      "version": "6.0.3",
+      "license": "MIT",
+      "devDependencies": {
+        "@commitlint/cli": "^12.1.4",
+        "@commitlint/config-conventional": "^12.1.4",
+        "@rollup/plugin-typescript": "^8.2.1",
+        "@types/chai": "^4.2.19",
+        "@types/mocha": "^8.2.2",
+        "@types/node": "^15.12.4",
+        "@types/sinon": "^10.0.2",
+        "@typescript-eslint/parser": "^4.27.0",
+        "chai": "^4.3.4",
+        "class-validator": "^0.13.1",
+        "coveralls": "^3.1.0",
+        "eslint": "^7.29.0",
+        "husky": "^4.2.5",
+        "js-yaml": "^4.1.0",
+        "mocha": "^9.0.1",
+        "nyc": "14.1.1",
+        "rimraf": "^3.0.2",
+        "rollup": "^2.52.1",
+        "rollup-plugin-terser": "^7.0.2",
+        "sinon": "^11.1.1",
+        "standard-version": "^9.3.0",
+        "ts-node": "^10.0.0",
+        "tslib": "^2.3.0",
+        "typescript": "^4.3.4",
+        "yarn-add-no-save": "^1.0.3"
+      }
+    },
+    "node_modules/.pnpm/tslib@2.5.0/node_modules/tslib": {
+      "version": "2.5.0",
+      "dev": true,
+      "license": "0BSD"
+    },
+    "node_modules/.pnpm/undici@5.22.0": {},
+    "node_modules/.pnpm/undici@5.22.0/node_modules/busboy": {
+      "resolved": "node_modules/.pnpm/busboy@1.6.0/node_modules/busboy",
+      "link": true
+    },
+    "node_modules/.pnpm/undici@5.22.0/node_modules/undici": {
+      "version": "5.22.0",
+      "license": "MIT",
+      "dependencies": {
+        "busboy": "^1.6.0"
+      },
+      "engines": {
+        "node": ">=14.0"
+      }
+    },
+    "node_modules/.pnpm/util-deprecate@1.0.2/node_modules/util-deprecate": {
+      "version": "1.0.2",
+      "license": "MIT"
+    },
+    "node_modules/.pnpm/ws@8.13.0/node_modules/ws": {
+      "version": "8.13.0",
+      "license": "MIT",
+      "devDependencies": {
+        "benchmark": "^2.1.4",
+        "bufferutil": "^4.0.1",
+        "eslint": "^8.0.0",
+        "eslint-config-prettier": "^8.1.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "mocha": "^8.4.0",
+        "nyc": "^15.0.0",
+        "prettier": "^2.0.5",
+        "utf-8-validate": "^6.0.0"
+      },
+      "engines": {
+        "node": ">=10.0.0"
+      },
+      "peerDependencies": {
+        "bufferutil": "^4.0.1",
+        "utf-8-validate": ">=5.0.2"
+      },
+      "peerDependenciesMeta": {
+        "bufferutil": {
+          "optional": true
+        },
+        "utf-8-validate": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/@types/callsite": {
+      "resolved": "node_modules/.pnpm/@types+callsite@1.0.31/node_modules/@types/callsite",
+      "link": true
+    },
+    "node_modules/callsite": {
+      "resolved": "node_modules/.pnpm/callsite@1.0.0/node_modules/callsite",
+      "link": true
+    },
+    "node_modules/discord.js": {
+      "resolved": "node_modules/.pnpm/discord.js@14.11.0/node_modules/discord.js",
+      "link": true
+    },
+    "node_modules/tslib": {
+      "resolved": "node_modules/.pnpm/tslib@2.5.0/node_modules/tslib",
+      "link": true
+    }
+  }
+}
