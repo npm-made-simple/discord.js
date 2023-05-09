@@ -1,26 +1,51 @@
 import {
     ChatInputCommandInteraction,
+    Collection,
     Client as DiscordClient,
     GatewayIntentBits,
     ModalSubmitInteraction,
+    SlashCommandAttachmentOption,
+    SlashCommandBooleanOption,
     SlashCommandBuilder,
-    SlashCommandSubcommandBuilder
+    SlashCommandChannelOption,
+    SlashCommandIntegerOption,
+    SlashCommandMentionableOption,
+    SlashCommandNumberOption,
+    SlashCommandRoleOption,
+    SlashCommandStringOption,
+    SlashCommandSubcommandBuilder,
+    SlashCommandUserOption
 } from "discord.js";
 
 export * from "discord.js";
 export class Client extends DiscordClient<boolean> {
+    readonly db?: any;
+    readonly commands: Collection<string, Command>;
+    readonly modals: Collection<string, Modal>;
     constructor(intents: (keyof typeof GatewayIntentBits)[]);
-    public addModal(name: string, data: Modal): void;
-    public addModalsFolder(path: string): void;
-    public addCommand(name: string, data: Command | SubcommandCommand): void;
-    public addCommandsFolder(path: string): void;
-    public registerCommands(guildId?: string): Promise<unknown>;
-    public addEvent(name: string, data: Event): void;
-    public addEventsFolder(path: string): void;
-    public start(token?: string): Promise<string>;
-    get commands(): Map<string, Command | SubcommandCommand>;
+
+    addModal(name: string, data: Modal): void;
+    addModalsFolder(path: string): void;
+    addCommand(name: string, data: Command | SubcommandCommand): void;
+    addCommandsFolder(path: string): void;
+    registerCommands(guildId?: string): Promise<unknown>;
+    addEvent(name: string, data: Event): void;
+    addEventsFolder(path: string): void;
+    start(token?: string): Promise<string>;
 }
+
 export default Client;
+
+export type SlashCommandOptions =
+    | SlashCommandAttachmentOption
+    | SlashCommandBooleanOption
+    | SlashCommandChannelOption
+    | SlashCommandIntegerOption
+    | SlashCommandMentionableOption
+    | SlashCommandNumberOption
+    | SlashCommandRoleOption
+    | SlashCommandStringOption
+    | SlashCommandUserOption;
 
 export interface Argument {
     name: string;
@@ -34,7 +59,7 @@ export interface Command {
     name?: string;
     description: string;
     args?: Argument[];
-    allowedInDMS?: boolean;
+    allowedInDMs?: boolean;
     permissionsRequired?: number;
     required?: boolean;
     builder?: SlashCommandBuilder,
@@ -51,7 +76,7 @@ export interface Subcommand {
 export interface SubcommandCommand {
     name?: string;
     builder: SlashCommandBuilder;
-    subcommands: Subcommand[];
+    subcommands: Collection<string, Subcommand>;
 }
 
 export interface Modal {
