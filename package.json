@@ -1,6 +1,7 @@
 {
-    "name": "simple-djs-framework",
-    "version": "2.1.1",
+    "name": "@made-simple/discord.js",
+    "private": false,
+    "version": "2.1.2",
     "main": "./index.js",
     "types": "./index.d.ts",
     "exports": "./index.js",
@@ -36,5 +37,8 @@
     "files": [
         "index.js",
         "index.d.ts"
-    ]
+    ],
+    "publishConfig": {
+        "access": "public"
+    }
 }

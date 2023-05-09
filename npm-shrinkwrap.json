@@ -1,12 +1,12 @@
 {
-  "name": "simple-djs-framework",
-  "version": "2.1.1",
+  "name": "@made-simple/discord.js",
+  "version": "2.1.2",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "simple-djs-framework",
-      "version": "2.1.1",
+      "name": "@made-simple/discord.js",
+      "version": "2.1.2",
       "license": "MIT",
       "dependencies": {
         "callsite": "1.0.0",

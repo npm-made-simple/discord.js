@@ -7,7 +7,7 @@ Makes it extremely easy to create and get a bot up and running with [Discord.JS]
 ## Installation
 
 ```bash
-npm install simple-djs-framework
+npm install @made-simple/discord.js
 ```
 
 ## Example Usage
