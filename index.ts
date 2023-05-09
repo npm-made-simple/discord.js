@@ -4,14 +4,14 @@ import { readdirSync } from 'node:fs';
 import callsite from 'callsite';
 import { Command, Event, Modal, SlashCommandOptions, Subcommand, SubcommandCommand } from '.';
 
-class Client<A, B> extends DiscordClient<boolean> {
+class Client<DB> extends DiscordClient {
     readonly commands = new Collection<string, Command>();
     readonly modals = new Collection<string, Modal>();
 
     private hasModals = false;
     private readonly caller = dirname(callsite()[2].getFileName());
 
-    constructor(intents: (keyof typeof GatewayIntentBits)[], readonly db?: B) {
+    constructor(intents: (keyof typeof GatewayIntentBits)[], readonly db?: DB) {
         super({ intents });
     }
 

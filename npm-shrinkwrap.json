@@ -1,12 +1,12 @@
 {
   "name": "simple-djs-framework",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
       "name": "simple-djs-framework",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "license": "MIT",
       "dependencies": {
         "callsite": "1.0.0",

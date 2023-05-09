@@ -18,11 +18,11 @@ import {
 } from "discord.js";
 
 export * from "discord.js";
-export class Client extends DiscordClient<boolean> {
-    readonly db?: any;
+export class Client<DB> extends DiscordClient {
+    readonly db?: DB;
     readonly commands: Collection<string, Command>;
     readonly modals: Collection<string, Modal>;
-    constructor(intents: (keyof typeof GatewayIntentBits)[]);
+    constructor(intents: (keyof typeof GatewayIntentBits)[], db?: DB);
 
     addModal(name: string, data: Modal): void;
     addModalsFolder(path: string): void;
