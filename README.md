@@ -1,4 +1,4 @@
-# Simple Discord.JS Framework
+# Simple Discord.JS Framework [![@made-simple/discord.js](https://github.com/npm-made-simple/discord.js/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/npm-made-simple/discord.js/actions/workflows/npm-publish.yml)
 
 ---
 
