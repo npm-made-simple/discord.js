@@ -8,7 +8,8 @@ import {
     REST,
     Routes,
     Snowflake,
-    ClientEvents
+    ClientEvents,
+    Partials
 } from 'discord.js';
 import { Command, Subcommand, SubcommandGroup } from './Command.js';
 import { Event } from './Event.js';
@@ -18,6 +19,11 @@ import chalk from 'chalk';
 
 export interface ClientExtensions {
     db?: any;
+}
+
+export interface ClientOptions {
+    intents: (keyof typeof GatewayIntentBits)[];
+    partials: (keyof typeof Partials)[];
 }
 
 /**
@@ -41,11 +47,15 @@ export interface ClientExtensions {
 export class Client<Ext extends ClientExtensions> extends DiscordClient {
     readonly commands = new Collection<string, Command>();
 
-    constructor(
-        intents: (keyof typeof GatewayIntentBits)[],
-        readonly db?: Ext['db']
-    ) {
-        super({ intents });
+    constructor(options: Partial<ClientOptions>, readonly db?: Ext['db']) {
+        options.intents ??= [];
+        const intents = options.intents.map((i) => GatewayIntentBits[i]);
+        const partials = options.partials?.map((p) => Partials[p]);
+
+        super({
+            intents,
+            partials
+        });
     }
 
     /**
