@@ -16,8 +16,7 @@
         "check": "npm run check:lint && npm run check:format",
         "format": "prettier --write src",
         "lint": "npm run check:lint -- --fix",
-        "build": "tsc --build --verbose",
-        "publish": "npm run build && npm publish --access public"
+        "build": "tsc --build --verbose"
     },
     "dependencies": {
         "chalk": "^5.2.0",
