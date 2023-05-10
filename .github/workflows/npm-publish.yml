@@ -1,4 +1,4 @@
-name: Publish NPM package
+name: '@made-simple/discord.js'
 
 on:
   release:
