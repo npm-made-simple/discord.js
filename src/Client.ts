@@ -13,7 +13,7 @@ import {
 } from 'discord.js';
 import { Command, Subcommand, SubcommandGroup } from './Command.js';
 import { Event } from './Event.js';
-import { PathLike, readdirSync } from 'node:fs';
+import { PathLike, readdirSync, lstatSync } from 'node:fs';
 import { tag, prefix } from './logger.js';
 import chalk from 'chalk';
 
@@ -148,7 +148,9 @@ export class Client<Ext extends ClientExtensions> extends DiscordClient {
                 const command: Command = (await import(commandFile.toString()))
                     .default;
                 this.addCommand(command);
-            } else if (!file.match(/\.w+$/)) {
+            } else if (
+                lstatSync(new URL(file, directory.toString())).isDirectory()
+            ) {
                 const subpath = new URL(file, directory.toString());
                 const subfiles = readdirSync(subpath).filter((file) =>
                     file.endsWith('.js')
