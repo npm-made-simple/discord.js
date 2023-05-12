@@ -148,7 +148,7 @@ export class Client<Ext extends ClientExtensions> extends DiscordClient {
                 const command: Command = (await import(commandFile.toString()))
                     .default;
                 this.addCommand(command);
-            } else if (!file.startsWith('.')) {
+            } else if (!file.match(/\.w+$/)) {
                 const subpath = new URL(file, directory.toString());
                 const subfiles = readdirSync(subpath).filter((file) =>
                     file.endsWith('.js')
