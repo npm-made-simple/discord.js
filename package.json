@@ -7,9 +7,6 @@
     "author": "alex* <31458482+alexasterisk@users.noreply.github.com>",
     "license": "MIT",
     "type": "module",
-    "engines": {
-        "node": ">=16.0.0"
-    },
     "scripts": {
         "check:lint": "eslint src --ext .ts",
         "check:format": "prettier --check src",
