@@ -1,38 +1,32 @@
 {
     "name": "@made-simple/discord.js",
     "private": false,
-    "version": "3.1.2",
+    "version": "4.0.0",
     "types": "./dist/index.d.ts",
     "exports": "./dist/index.js",
-    "author": "alex* <31458482+alexasterisk@users.noreply.github.com>",
+    "author": {
+        "name": "alexasterisk",
+        "url": "https://github.com/alexasterisk"
+    },
     "license": "MIT",
     "type": "module",
     "scripts": {
-        "check:lint": "eslint src --ext .ts",
-        "check:format": "prettier --check src",
-        "check": "npm run check:lint && npm run check:format",
-        "format": "prettier --write src",
-        "lint": "npm run check:lint -- --fix",
-        "build": "tsc --build --verbose"
+        "build": "tsc --build --verbose",
+        "prepublishOnly": "npm run build"
     },
     "dependencies": {
-        "chalk": "^5.2.0",
-        "discord.js": "^14.11.0"
+        "@made-simple/logging": "^1.0.2",
+        "@made-simple/sqlite-store": "^1.0.0",
+        "discord.js": "^14.15.2"
     },
     "devDependencies": {
-        "@types/node": "^20.1.1",
-        "@typescript-eslint/eslint-plugin": "^5.59.5",
-        "@typescript-eslint/parser": "^5.59.5",
-        "eslint": "^8.40.0",
-        "eslint-config-prettier": "^8.8.0",
-        "eslint-plugin-prettier": "^4.2.1",
-        "prettier": "^2.8.8",
-        "ts-node": "^10.9.1",
-        "tslib": "^2.5.0"
+        "@types/node": "^20.12.12",
+        "ts-node": "^10.9.2",
+        "tslib": "^2.6.2"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/alexasterisk/simple-djs-framework.git"
+        "url": "https://github.com/npm-made-simple/discord.js.git"
     },
     "keywords": [
         "discord.js",
