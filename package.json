@@ -11,8 +11,8 @@
     "license": "MIT",
     "type": "module",
     "scripts": {
-        "build": "tsc --build --verbose",
-        "prepublishOnly": "npm run build"
+        "build": "rm -rf dist && npm ci && tsc -b",
+        "prepublishOnly": "npm shrinkwrap && npm run build"
     },
     "dependencies": {
         "@made-simple/logging": "^1.0.2",
