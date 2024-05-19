@@ -47,7 +47,7 @@ export interface SubcommandGroupData {
     data: SlashCommandBuilder;
     permissions?: Readonly<PermissionsBitField>;
     subcommands?: Map<string, SubcommandData>;
-    execute: EmitListener<Events.InteractionCreate>;
+    execute?: EmitListener<Events.InteractionCreate>;
 }
 
 export interface SubcommandData {
@@ -77,10 +77,10 @@ export function reply(interaction: CommandInteraction, options: string | Message
     return interaction.reply(options);
 }
 
-const activeRegex = /^[^_].+\s.js$/;
+const activeRegex = /^[^_].+\.js$/;
 const activeFolderRegex = /^[^_]/;
 function isActiveFile(file: Dirent): false | RegExpMatchArray | null {
-    return file.isFile() && file.name.match(activeRegex);
+    return (file.isFile() && file.name.match(activeRegex));
 }
 
 function iterateDirent<T>(url: URL, callback: (data: T) => void) {
@@ -149,11 +149,9 @@ export class Client<T extends {} = {}> extends DiscordClient {
             else partials.push(partial);
         }
 
-        super({
-            ...options,
-            intents,
-            partials
-        });
+        options.intents = intents;
+        options.partials = partials;
+        super(options as DiscordClientOptions);
     }
 
     /**
