@@ -19,10 +19,12 @@ import {
     SlashCommandBuilder,
     SlashCommandSubcommandBuilder
 } from "discord.js";
-import logger from "@made-simple/logging";
+import { TaggedLogger, chalk } from "@made-simple/logging";
 import Store from "@made-simple/sqlite-store";
 
 import { Dirent, readdirSync } from "node:fs";
+
+const logger = new TaggedLogger("discord.js", chalk.cyanBright);
 
 export interface ClientOptions extends Omit<DiscordClientOptions, "intents" | "partials"> {
     intents: (keyof typeof GatewayIntentBits | GatewayIntentBits)[];

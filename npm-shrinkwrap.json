@@ -1,16 +1,16 @@
 {
     "name": "@made-simple/discord.js",
-    "version": "4.0.3",
+    "version": "4.0.4",
     "lockfileVersion": 3,
     "requires": true,
     "packages": {
         "": {
             "name": "@made-simple/discord.js",
-            "version": "4.0.3",
+            "version": "4.0.4",
             "license": "MIT",
             "dependencies": {
-                "@made-simple/logging": "^1.2.0",
-                "@made-simple/sqlite-store": "^1.0.0",
+                "@made-simple/logging": "2.0.0",
+                "@made-simple/sqlite-store": "1.1.0",
                 "discord.js": "^14.15.2"
             },
             "devDependencies": {
@@ -193,19 +193,20 @@
             }
         },
         "node_modules/@made-simple/logging": {
-            "version": "1.2.0",
-            "resolved": "https://registry.npmjs.org/@made-simple/logging/-/logging-1.2.0.tgz",
-            "integrity": "sha512-1hPtpfia1mZcChppV9cL/s3oxDbgGG2B78prXxv5PlCE9gDhOn5AuNsyf4tcgJCXjw2gAlZKbeXFb3b+vdK3PA==",
+            "version": "2.0.0",
+            "resolved": "https://registry.npmjs.org/@made-simple/logging/-/logging-2.0.0.tgz",
+            "integrity": "sha512-VzSuqbaFOz+NcZVays/csdSIZKJ6wOM23Q4CFeYRm+uiKvCgwfXhbHr7pyPJEWPCuC8njnt95vCKNiGJtDP0Wg==",
             "dependencies": {
                 "chalk": "^5.3.0"
             }
         },
         "node_modules/@made-simple/sqlite-store": {
-            "version": "1.0.0",
-            "resolved": "https://registry.npmjs.org/@made-simple/sqlite-store/-/sqlite-store-1.0.0.tgz",
-            "integrity": "sha512-233rdBaiY40z9fWj6JPRDKrGYVTjCjwFKlHcvZctdxLNVrGmiOOT4PkvFTuCJpPVjAmCW1hRDGEBgnvNEYOcZA==",
+            "version": "1.1.0",
+            "resolved": "https://registry.npmjs.org/@made-simple/sqlite-store/-/sqlite-store-1.1.0.tgz",
+            "integrity": "sha512-rIEbimGAH1EHGtJ7LgNQK+F4aUpbf32MBssfVZ2LR5bKK1MdwwJjiWiCcFuHzup1u7394WkTQVbJCr6CNUjGig==",
             "dependencies": {
                 "@keyv/sqlite": "^3.6.7",
+                "@made-simple/logging": "2.0.0",
                 "keyv": "^4.5.4"
             }
         },
