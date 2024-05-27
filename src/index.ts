@@ -70,9 +70,11 @@ export interface ContextMenuData<T extends keyof typeof ApplicationCommandType =
  * @param {CommandInteraction} interaction The interaction to reply to.
  * @param {string | MessagePayload | InteractionReplyOptions} options The options for the reply.
  * @returns {Promise<Message<boolean>> | Promise<InteractionResponse<boolean>>}
- * @example
+ * 
+ * ```ts
  * reply(interaction, "Hello, world!");
  * reply(interaction, { content: "This would be followed up!", ephemeral: true });
+ * ```
  */
 export function reply(interaction: CommandInteraction, options: string | MessagePayload | InteractionReplyOptions): Promise<Message<boolean>> | Promise<InteractionResponse<boolean>> {
     if (interaction.deferred || interaction.replied) return interaction.followUp(options);
@@ -115,11 +117,13 @@ function sleep(s: number): number {
  * The client class for the bot.
  * @template T - The type of the database store.
  * @extends DiscordClient
- * @example
+ * 
+ * ```ts
  * const client = new Client({
  *     intents: ["Guilds", "GuildMessages"],
  *     partials: ["MessageContent"]
  * });
+ * ```
  */
 export class Client<T extends {} = {}> extends DiscordClient {
     store = new Store<T>("database");
@@ -132,11 +136,13 @@ export class Client<T extends {} = {}> extends DiscordClient {
     /**
      * Creates a new client instance.
      * @param {ClientOptions} options The options for the client.
-     * @example
+     * 
+     * ```ts
      * const client = new Client({
      *     intents: ["Guilds", "GuildMessages"],
      *     partials: ["MessageContent"]
      * });
+     * ```
      */
     constructor(options: ClientOptions) {
         let intents: GatewayIntentBits[] = [];
@@ -161,7 +167,8 @@ export class Client<T extends {} = {}> extends DiscordClient {
      * @param {keyof ClientEvents} event The event to listen for.
      * @param {EmitListener<T>} listener The listener for the event.
      * @returns {this}
-     * @example
+     * 
+     * ```ts
      * client.on("ready", client => {
      *     console.log(`Logged in as ${client.user.tag}`);
      * });
@@ -170,6 +177,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
      * client.on(Events.InteractionCreate, async (client, interaction) => {
      *     // Handle interaction
      * });
+     * ```
      */
     on<T extends keyof ClientEvents>(event: T, listener: EmitListener<T>): this {
         super.on(event, (...args: ClientEvents[T]) => listener(this, ...args));
@@ -181,10 +189,12 @@ export class Client<T extends {} = {}> extends DiscordClient {
      * @param {keyof ClientEvents} event The event to listen for.
      * @param {EmitListener<T>} listener The listener for the event.
      * @returns {this}
-     * @example
+     * 
+     * ```ts
      * client.once("ready", client => {
      *     console.log(`Logged in as ${client.user.tag}`);
      * });
+     * ```
      */
     once<T extends keyof ClientEvents>(event: T, listener: EmitListener<T>): this {
         super.once(event, (...args: ClientEvents[T]) => listener(this, ...args));
@@ -196,8 +206,10 @@ export class Client<T extends {} = {}> extends DiscordClient {
      * Ignores files and directories starting with an underscore.
      * @param {URL} url The URL of the directory to load events from.
      * @returns {this}
-     * @example
+     *
+     * ```ts
      * client.loadEventsFrom(new URL("./events", import.meta.url));
+     * ```
      */
     loadEventsFrom(url: URL): this {
         iterateDirent<EventData<keyof ClientEvents>>(url, event => {
@@ -213,8 +225,10 @@ export class Client<T extends {} = {}> extends DiscordClient {
      * Ignores files and directories starting with an underscore.
      * @param {URL} url The URL of the directory to load context menus from.
      * @returns {this}
-     * @example
+     *
+     * ```ts
      * client.loadContextMenusFrom(new URL("./context-menus", import.meta.url));
+     * ```
      */
     loadContextMenusFrom(url: URL): this {
         iterateDirent<ContextMenuData>(url, context => {
@@ -231,8 +245,10 @@ export class Client<T extends {} = {}> extends DiscordClient {
      * Ignores files and directories starting with an underscore.
      * @param {URL} url The URL of the directory to load commands from.
      * @returns {this}
-     * @example
+     * 
+     * ```ts
      * client.loadCommandsFrom(new URL("./commands", import.meta.url));
+     * ```
      */
     loadCommandsFrom(url: URL): this {
         const commandFiles = readdirSync(url, { withFileTypes: true });
@@ -288,11 +304,101 @@ export class Client<T extends {} = {}> extends DiscordClient {
     }
 
     /**
+     * Uses the default interaction handler for the client.
+     * This will automatically handle commands and context menus
+     * in the intended way. Do not use an `interactionCreate` event if using this.
+     * @returns {this}
+     * 
+     * ```ts
+     * client.useDefaultInteractionHandler();
+     * // "[DEBUG] Using default interaction handler, do not use an 'interactionCreate' event listener!"
+     * ```
+     */
+    useDefaultInteractionHandler(): this {
+        logger.debug("Using default interaction handler, do not use an 'interactionCreate' event listener!");
+        this.on(Events.InteractionCreate, async (client, interaction) => {
+            const { member } = interaction;
+
+            if (interaction.isChatInputCommand()) {
+                const { commandName } = interaction;
+                const command = client.commands.get(commandName);
+
+                if (!command) {
+                    await interaction.reply({
+                        content: `Could not find command **${commandName}**!`,
+                        ephemeral: true
+                    });
+
+                    return;
+                }
+
+                if (command.permissions && !(member?.permissions as Readonly<PermissionsBitField>).has(command.permissions)) {
+                    await interaction.reply({
+                        content: "You do not have permission to use this command!",
+                        ephemeral: true
+                    });
+
+                    return;
+                }
+
+                try {
+                    await command.execute!(client, interaction);
+                } catch (error) {
+                    logger.error(error);
+                    await reply(interaction, {
+                        content: "There was an error while executing this command!",
+                        ephemeral: true
+                    });
+                }
+            } else if (interaction.isContextMenuCommand()) {
+                const { commandName } = interaction;
+                let type: "User" | "Message";
+                if (interaction.isUserContextMenuCommand()) type = "User";
+                else if (interaction.isMessageContextMenuCommand()) type = "Message";
+                else return;
+
+                const context = client.contexts[type].get(commandName);
+                if (!context) {
+                    await interaction.reply({
+                        content: `Could not find context menu **${commandName}**!`,
+                        ephemeral: true
+                    });
+                    
+                    return;
+                }
+
+                if (context.permissions && !(member?.permissions as Readonly<PermissionsBitField>).has(context.permissions)) {
+                    await interaction.reply({
+                        content: "You do not have permission to use this context menu!",
+                        ephemeral: true
+                    });
+
+                    return;
+                }
+
+                try {
+                    await context.execute(client, interaction);
+                } catch (error) {
+                    logger.error(error);
+                    await reply(interaction, {
+                        content: "There was an error while executing this context menu!",
+                        ephemeral: true
+                    });
+                }
+            }
+        });
+
+        return this;
+    }
+
+    /**
      * Logs the client in and registers interactions if they've been changed.
      * @param {string} [token] The token to log in with. Defaults to the `DISCORD_TOKEN` environment variable.
      * @returns {Promise<string>} The token used to log in.
-     * @example
+     *
+     * ```ts
      * client.login();
+     * ```
      */
     async login(token?: string): Promise<string> {
         token ??= process.env.DISCORD_TOKEN;
