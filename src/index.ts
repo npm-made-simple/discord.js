@@ -315,7 +315,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
      * ```
      */
     useDefaultInteractionHandler(): this {
-        logger.debug("Using default interaction handler, do not use an 'interactionCreate' event listener!");
+        logger.info("Using default interaction handler, do not use an 'interactionCreate' event listener!");
         this.on(Events.InteractionCreate, async (client, interaction) => {
             const { member } = interaction;
 
