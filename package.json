@@ -15,8 +15,8 @@
         "prepublishOnly": "npm shrinkwrap && npm run build"
     },
     "dependencies": {
-        "@made-simple/logging": "^2.0.1",
-        "@made-simple/sqlite-store": "^1.1.1",
+        "@made-simple/logging": "^2.1.0",
+        "@made-simple/sqlite-store": "^1.1.2",
         "discord.js": "^14.15.2"
     },
     "devDependencies": {

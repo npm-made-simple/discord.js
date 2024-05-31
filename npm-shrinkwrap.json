@@ -9,8 +9,8 @@
             "version": "4.1.2",
             "license": "MIT",
             "dependencies": {
-                "@made-simple/logging": "^2.0.1",
-                "@made-simple/sqlite-store": "^1.1.1",
+                "@made-simple/logging": "^2.1.0",
+                "@made-simple/sqlite-store": "^1.1.2",
                 "discord.js": "^14.15.2"
             },
             "devDependencies": {
@@ -193,20 +193,21 @@
             }
         },
         "node_modules/@made-simple/logging": {
-            "version": "2.0.1",
-            "resolved": "https://registry.npmjs.org/@made-simple/logging/-/logging-2.0.1.tgz",
-            "integrity": "sha512-AmZnGsdqFuLuZfqns0SXqqx2BxwZsD3tTtv6MyWnttp/hgcaJb6sNHq1ejmtsFWPlV+b77vsyfD8h1s5vViNRg==",
+            "version": "2.1.0",
+            "resolved": "https://registry.npmjs.org/@made-simple/logging/-/logging-2.1.0.tgz",
+            "integrity": "sha512-G/W+8Th4m5hZJ0iZ8aCu9YgUSDmHtz0HgAHNYZq8mqIiCyrIYuPwQKXBczWYSIezqHgJhtOpPbQ8JaJknJOc5Q==",
             "dependencies": {
-                "chalk": "^5.3.0"
+                "chalk": "^5.3.0",
+                "parsed-packages": "^1.1.0"
             }
         },
         "node_modules/@made-simple/sqlite-store": {
-            "version": "1.1.1",
-            "resolved": "https://registry.npmjs.org/@made-simple/sqlite-store/-/sqlite-store-1.1.1.tgz",
-            "integrity": "sha512-zarSxHupGEaGXDWcZNceqtjUaFK9GjPl/7g5VOUWBm248Kr9GAA9SjAcdSd6NW3IjQHDEnqmJylELVA5bARdlg==",
+            "version": "1.1.2",
+            "resolved": "https://registry.npmjs.org/@made-simple/sqlite-store/-/sqlite-store-1.1.2.tgz",
+            "integrity": "sha512-r+hRsSwQ7t3/lBfeYIaphHTC2ThXqVnOw1Rnagpmf7nMj7hq7KVRLgUvFLJpIawuQn6G4bU88rUHDrHMf3PxsA==",
             "dependencies": {
                 "@keyv/sqlite": "^3.6.7",
-                "@made-simple/logging": "^2.0.1",
+                "@made-simple/logging": "^2.1.0",
                 "keyv": "^4.5.4"
             }
         },
@@ -1286,6 +1287,11 @@
             "funding": {
                 "url": "https://github.com/sponsors/sindresorhus"
             }
+        },
+        "node_modules/parsed-packages": {
+            "version": "1.1.0",
+            "resolved": "https://registry.npmjs.org/parsed-packages/-/parsed-packages-1.1.0.tgz",
+            "integrity": "sha512-fq/fR6BJrdpBQ0yLZxB8yiz/HCIqn7/MYnknH7pxW0XXSsE4T462eQFreZ+SHiVjtjJ6TH1CgOhgwW6TEfw2Fw=="
         },
         "node_modules/path-is-absolute": {
             "version": "1.0.1",
