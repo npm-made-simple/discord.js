@@ -434,14 +434,14 @@ export class Client<T extends {} = {}> extends DiscordClient {
             return token;
         }
 
-        logger.debug("Registering interactions...");
+        logger.info("Registering interactions...");
         const rest = new REST().setToken(token);
 
         try {
             if (isTestEnv && guildId) await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: all });
             else await rest.put(Routes.applicationCommands(clientId), { body: all });
             this.store.set("%registered_applications%", parsedString);
-            logger.debug("Interactions have been registered!");
+            logger.success("Interactions have been registered!");
         } catch (error) {
             logger.error(error);
             process.exit(1);
