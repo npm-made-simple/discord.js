@@ -17,6 +17,7 @@ import {
     REST,
     Routes,
     SlashCommandBuilder,
+    SlashCommandOptionsOnlyBuilder,
     SlashCommandSubcommandBuilder
 } from "discord.js";
 import { TaggedLogger, chalk } from "@made-simple/logging";
@@ -40,7 +41,7 @@ export interface EventData<T extends keyof ClientEvents> {
 }
 
 export interface CommandData {
-    data: SlashCommandBuilder;
+    data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder;
     permissions?: Readonly<PermissionsBitField>;
     execute: EmitListener<Events.InteractionCreate>;
 }
