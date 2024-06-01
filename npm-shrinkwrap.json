@@ -1,16 +1,16 @@
 {
     "name": "@made-simple/discord.js",
-    "version": "4.1.3",
+    "version": "4.1.4",
     "lockfileVersion": 3,
     "requires": true,
     "packages": {
         "": {
             "name": "@made-simple/discord.js",
-            "version": "4.1.3",
+            "version": "4.1.4",
             "license": "MIT",
             "dependencies": {
-                "@made-simple/logging": "^2.1.0",
-                "@made-simple/sqlite-store": "^1.1.2",
+                "@made-simple/logging": "^2.2.0",
+                "@made-simple/sqlite-store": "^1.1.3",
                 "discord.js": "^14.15.2"
             },
             "devDependencies": {
@@ -193,21 +193,21 @@
             }
         },
         "node_modules/@made-simple/logging": {
-            "version": "2.1.0",
-            "resolved": "https://registry.npmjs.org/@made-simple/logging/-/logging-2.1.0.tgz",
-            "integrity": "sha512-G/W+8Th4m5hZJ0iZ8aCu9YgUSDmHtz0HgAHNYZq8mqIiCyrIYuPwQKXBczWYSIezqHgJhtOpPbQ8JaJknJOc5Q==",
+            "version": "2.2.0",
+            "resolved": "https://registry.npmjs.org/@made-simple/logging/-/logging-2.2.0.tgz",
+            "integrity": "sha512-+q6jpLeALOzOkzttLJjngzxkh0Fzux3IjZV4VRcmcv8GKQc6J98NXs3MuYOUjLP/qLFpYaO4tBKFOrR0X+9P9Q==",
             "dependencies": {
                 "chalk": "^5.3.0",
                 "parsed-packages": "^1.1.0"
             }
         },
         "node_modules/@made-simple/sqlite-store": {
-            "version": "1.1.2",
-            "resolved": "https://registry.npmjs.org/@made-simple/sqlite-store/-/sqlite-store-1.1.2.tgz",
-            "integrity": "sha512-r+hRsSwQ7t3/lBfeYIaphHTC2ThXqVnOw1Rnagpmf7nMj7hq7KVRLgUvFLJpIawuQn6G4bU88rUHDrHMf3PxsA==",
+            "version": "1.1.3",
+            "resolved": "https://registry.npmjs.org/@made-simple/sqlite-store/-/sqlite-store-1.1.3.tgz",
+            "integrity": "sha512-xFNGkhUdLHMcmegxPMSyX+yQYfSk5aMzGPH3aWCk8iRwF2XLn11ISExuVVlFR7+pEpV3BKOsvnCjH1sf3Pp03w==",
             "dependencies": {
                 "@keyv/sqlite": "^3.6.7",
-                "@made-simple/logging": "^2.1.0",
+                "@made-simple/logging": "^2.2.0",
                 "keyv": "^4.5.4"
             }
         },

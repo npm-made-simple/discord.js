@@ -1,7 +1,7 @@
 {
     "name": "@made-simple/discord.js",
     "private": false,
-    "version": "4.1.3",
+    "version": "4.1.4",
     "types": "./dist/index.d.ts",
     "exports": "./dist/index.js",
     "author": {
@@ -15,8 +15,8 @@
         "prepublishOnly": "npm shrinkwrap && npm run build"
     },
     "dependencies": {
-        "@made-simple/logging": "^2.1.0",
-        "@made-simple/sqlite-store": "^1.1.2",
+        "@made-simple/logging": "^2.2.0",
+        "@made-simple/sqlite-store": "^1.1.3",
         "discord.js": "^14.15.2"
     },
     "devDependencies": {
