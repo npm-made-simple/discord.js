@@ -1,16 +1,16 @@
 {
     "name": "@made-simple/discord.js",
-    "version": "4.3.1",
+    "version": "4.3.2",
     "lockfileVersion": 3,
     "requires": true,
     "packages": {
         "": {
             "name": "@made-simple/discord.js",
-            "version": "4.3.1",
+            "version": "4.3.2",
             "license": "MIT",
             "dependencies": {
                 "@made-simple/logging": "^2.3.1",
-                "@made-simple/sqlite-store": "^1.2.0",
+                "@made-simple/sqlite-store": "^1.2.1",
                 "discord.js": "^14.15.2"
             },
             "devDependencies": {
@@ -202,9 +202,9 @@
             }
         },
         "node_modules/@made-simple/sqlite-store": {
-            "version": "1.2.0",
-            "resolved": "https://registry.npmjs.org/@made-simple/sqlite-store/-/sqlite-store-1.2.0.tgz",
-            "integrity": "sha512-z5cu4TYWXnP5ltptpQ979V8RzXNkf+HoiUk8P0GmOB+y9xhU3Fwekk0260lbq6Pc+Fk3YSXdRpAKWPhmdGz70w==",
+            "version": "1.2.1",
+            "resolved": "https://registry.npmjs.org/@made-simple/sqlite-store/-/sqlite-store-1.2.1.tgz",
+            "integrity": "sha512-svYZ7oHFlO8d2MLIJMOVxZbRd4CuwMLEFweGCSr0f791inzHeCRTAJ9akiKc4fSYGSaxqqf6wURcGoaOgRnucA==",
             "dependencies": {
                 "@keyv/sqlite": "^3.6.7",
                 "@made-simple/logging": "^2.3.1",
