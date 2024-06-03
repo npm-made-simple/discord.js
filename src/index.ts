@@ -20,12 +20,10 @@ import {
     SlashCommandOptionsOnlyBuilder,
     SlashCommandSubcommandBuilder
 } from "discord.js";
-import { TaggedLogger, chalk } from "@made-simple/logging";
+import { LoggerBuilder, chalk } from "@made-simple/logging";
 import Store from "@made-simple/sqlite-store";
 
 import { Dirent, readdirSync } from "node:fs";
-
-const logger = new TaggedLogger("discord.js", chalk.cyanBright);
 
 export interface ClientOptions extends Omit<DiscordClientOptions, "intents" | "partials"> {
     intents: (keyof typeof GatewayIntentBits | GatewayIntentBits)[];
@@ -134,6 +132,8 @@ export class Client<T extends {} = {}> extends DiscordClient {
         Message: new Map<string, ContextMenuData<"Message">>(),
     }
 
+    logger: LoggerBuilder;
+
     /**
      * Creates a new client instance.
      * @param {ClientOptions} options The options for the client.
@@ -145,7 +145,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
      * });
      * ```
      */
-    constructor(options: ClientOptions) {
+    constructor(options: ClientOptions, logger?: LoggerBuilder) {
         let intents: GatewayIntentBits[] = [];
         for (const intent of options.intents) {
             if (typeof intent === "string") intents.push(GatewayIntentBits[intent]);
@@ -162,6 +162,8 @@ export class Client<T extends {} = {}> extends DiscordClient {
         options.intents = intents;
         options.partials = partials;
         super(options as DiscordClientOptions);
+
+        this.logger = logger ?? new LoggerBuilder("discord.js", chalk.cyanBright);
     }
 
     /**
@@ -216,7 +218,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
     loadEventsFrom(url: URL): this {
         iterateDirent<EventData<keyof ClientEvents>>(url, event => {
             this[event.once ? "once" : "on"](event.name, event.execute);
-            logger.debug(`Loaded event ${event.name}`);
+            this.logger.debug(`Loaded event ${event.name}`);
         });
 
         return this;
@@ -235,7 +237,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
     loadContextMenusFrom(url: URL): this {
         iterateDirent<ContextMenuData>(url, context => {
             this.contexts[context.type].set(context.data.name, context);
-            logger.debug(`Loaded context menu ${context.data.name}`);
+            this.logger.debug(`Loaded context menu ${context.data.name}`);
         });
 
         return this;
@@ -276,7 +278,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
                     try {
                         await subcommand.execute(client, interaction);
                     } catch (error) {
-                        logger.error(error);
+                        this.logger.error(error);
                         await reply(interaction, {
                             content: "There was an error while executing this command!",
                             ephemeral: true
@@ -290,15 +292,15 @@ export class Client<T extends {} = {}> extends DiscordClient {
                     const subcommand: SubcommandData = (await import(`${subURL}/${subfile.name}`)).default;
                     command.data.addSubcommand(subcommand.data);
                     command.subcommands!.set(subcommand.data.name, subcommand);
-                    logger.debug(`Loaded subcommand ${subcommand.data.name} for ${command.data.name}`);
+                    this.logger.debug(`Loaded subcommand ${subcommand.data.name} for ${command.data.name}`);
                 });
 
                 this.commands.set(command.data.name, command);
-                logger.debug(`Loaded command ${command.data.name}`);
+                this.logger.debug(`Loaded command ${command.data.name}`);
             } else if (file.name.match(activeRegex)) {
                 const command: CommandData = (await import(`${url}/${file.name}`)).default;
                 this.commands.set(command.data.name, command);
-                logger.debug(`Loaded command ${command.data.name}`);
+                this.logger.debug(`Loaded command ${command.data.name}`);
             }
         });
 
@@ -317,7 +319,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
      * ```
      */
     useDefaultInteractionHandler(): this {
-        logger.info("Using default interaction handler, do not use an 'interactionCreate' event listener!");
+        this.logger.info("Using default interaction handler, do not use an 'interactionCreate' event listener!");
         this.on(Events.InteractionCreate, async (client, interaction) => {
             const { member } = interaction;
 
@@ -346,7 +348,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
                 try {
                     await command.execute!(client, interaction);
                 } catch (error) {
-                    logger.error(error);
+                    this.logger.error(error);
                     await reply(interaction, {
                         content: "There was an error while executing this command!",
                         ephemeral: true
@@ -381,7 +383,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
                 try {
                     await context.execute(client, interaction);
                 } catch (error) {
-                    logger.error(error);
+                    this.logger.error(error);
                     await reply(interaction, {
                         content: "There was an error while executing this context menu!",
                         ephemeral: true
@@ -411,16 +413,16 @@ export class Client<T extends {} = {}> extends DiscordClient {
         const guildId = process.env.TEST_GUILD_ID;
 
         if (!token || !clientId) {
-            logger.error("No token or client ID was provided!");
+            this.logger.error("No token or client ID was provided!");
             process.exit(1);
         }
 
         if (isTestEnv && !guildId) {
-            logger.warn("No guild ID was provided for the test environment!\nCommands will be registered globally in 5 seconds.");
+            this.logger.warn("No guild ID was provided for the test environment!\nCommands will be registered globally in 5 seconds.");
             sleep(5);
         }
 
-        logger.debug("Checking if interactions need to be registered...");
+        this.logger.debug("Checking if interactions need to be registered...");
         const commands = Array.from(this.commands.values()).map(command => command.data.toJSON());
         const userContexts = Array.from(this.contexts.User.values()).map(context => context.data.toJSON());
         const messageContexts = Array.from(this.contexts.Message.values()).map(context => context.data.toJSON());
@@ -431,20 +433,20 @@ export class Client<T extends {} = {}> extends DiscordClient {
             .replace(/\s/g, "");
 
         if (this.store.get("%registered_applications%", "") === parsedString && parsedString !== "") {
-            logger.debug("Interactions are already registered!");
+            this.logger.log("Interactions are currently up to date!");
             return token;
         }
 
-        logger.info("Registering interactions...");
+        this.logger.info("Registering interactions...");
         const rest = new REST().setToken(token);
 
         try {
             if (isTestEnv && guildId) await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: all });
             else await rest.put(Routes.applicationCommands(clientId), { body: all });
             this.store.set("%registered_applications%", parsedString);
-            logger.success("Interactions have been registered!");
+            this.logger.success("Interactions have been registered!");
         } catch (error) {
-            logger.error(error);
+            this.logger.error(error);
             process.exit(1);
         }
 
