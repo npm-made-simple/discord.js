@@ -1,7 +1,7 @@
 {
     "name": "@made-simple/discord.js",
     "private": false,
-    "version": "4.3.3",
+    "version": "4.3.4",
     "types": "./dist/index.d.ts",
     "exports": "./dist/index.js",
     "author": {

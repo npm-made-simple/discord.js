@@ -374,7 +374,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
 
         if (isTestEnv && !guildId) {
             this.logger.warn("No guild ID was provided for the test environment!\nCommands will be registered globally in 5 seconds.");
-            await thread.sleepAsync(5);
+            await thread.sleepAsync(5000);
         }
 
         this.logger.debug("Checking if interactions need to be registered...");
