@@ -261,7 +261,9 @@ export class Client<T extends {} = {}> extends DiscordClient {
             if (file.isDirectory() && file.name.match(activeFolderRegex)) {
                 const subURL = new URL(file.name, url);
                 const command: SubcommandGroupData = (await import(`${subURL}/index.js`)).default;
+                if (command.permissions) command.data.setDefaultMemberPermissions(command.permissions.bitfield);
                 command.subcommands ??= new Map();
+
                 command.execute ??= async (client, interaction) => {
                     if (!interaction.isChatInputCommand()) return;
                     const subcommandName = interaction.options.getSubcommand();
@@ -300,6 +302,8 @@ export class Client<T extends {} = {}> extends DiscordClient {
                 this.logger.debug(`Loaded command ${command.data.name}`);
             } else if (file.name.match(activeRegex)) {
                 const command: CommandData = (await import(`${url}/${file.name}`)).default;
+                if (command.permissions) command.data.setDefaultMemberPermissions(command.permissions.bitfield);
+        
                 this.commands.set(command.data.name, command);
                 this.logger.debug(`Loaded command ${command.data.name}`);
             }
