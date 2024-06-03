@@ -1,30 +1,12 @@
-import {
-    ApplicationCommandType,
-    Awaitable,
-    ClientEvents,
-    CommandInteraction,
-    ContextMenuCommandBuilder,
-    Client as DiscordClient,
-    ClientOptions as DiscordClientOptions,
-    Events,
-    GatewayIntentBits,
-    InteractionReplyOptions,
-    InteractionResponse,
-    Message,
-    MessagePayload,
-    Partials,
-    PermissionsBitField,
-    REST,
-    Routes,
-    SlashCommandBuilder,
-    SlashCommandOptionsOnlyBuilder,
-    SlashCommandSubcommandBuilder
-} from "discord.js";
+import { Client as DiscordClient, Events, GatewayIntentBits, Partials, REST, Routes, } from "discord.js";
+
 import { LoggerBuilder, chalk } from "@made-simple/logging";
+import { dirent, thread } from "@made-simple/util";
 import Store from "@made-simple/sqlite-store";
 
-import type { ChalkInstance } from "chalk";
-import { Dirent, readdirSync } from "node:fs";
+import { readdirSync } from "node:fs";
+
+import type { ApplicationCommandType, Awaitable, ClientEvents, CommandInteraction, ContextMenuCommandBuilder, ClientOptions as DiscordClientOptions, InteractionReplyOptions, InteractionResponse, Message, MessagePayload, PermissionsBitField, SlashCommandBuilder, SlashCommandOptionsOnlyBuilder, SlashCommandSubcommandBuilder } from "discord.js";
 
 export interface ClientOptions extends Omit<DiscordClientOptions, "intents" | "partials"> {
     intents: (keyof typeof GatewayIntentBits | GatewayIntentBits)[];
@@ -79,38 +61,6 @@ export interface ContextMenuData<T extends keyof typeof ApplicationCommandType =
 export function reply(interaction: CommandInteraction, options: string | MessagePayload | InteractionReplyOptions): Promise<Message<boolean>> | Promise<InteractionResponse<boolean>> {
     if (interaction.deferred || interaction.replied) return interaction.followUp(options);
     return interaction.reply(options);
-}
-
-const activeRegex = /^[^_].+\.js$/;
-const activeFolderRegex = /^[^_]/;
-function isActiveFile(file: Dirent): false | RegExpMatchArray | null {
-    return (file.isFile() && file.name.match(activeRegex));
-}
-
-function iterateDirent<T>(url: URL, callback: (data: T) => void) {
-    const files = readdirSync(url, { withFileTypes: true });
-    files.forEach(async file => {
-        if (file.isDirectory() && file.name.match(activeFolderRegex)) {
-            const subURL = new URL(file.name, url);
-            iterateDirent(subURL, callback);
-        } else if (file.name.match(activeRegex)) {
-            const data: T = (await import(`${url}/${file.name}`)).default;
-            callback(data);
-        }
-    });
-}
-
-function sleep(s: number): number {
-    const start = new Date().getTime();
-    let completed = false;
-
-    new Promise(resolve => setTimeout(resolve, s * 1000)).finally(() => {
-        completed = true;
-    });
-
-    while (!completed) continue;
-    const end = new Date().getTime();
-    return (end - start) / 1000;
 }
 
 /**
@@ -217,7 +167,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
      * ```
      */
     loadEventsFrom(url: URL): this {
-        iterateDirent<EventData<keyof ClientEvents>>(url, event => {
+        dirent.iterate<EventData<keyof ClientEvents>>(url, event => {
             this[event.once ? "once" : "on"](event.name, event.execute);
             this.logger.debug(`Loaded event ${event.name}`);
         });
@@ -236,7 +186,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
      * ```
      */
     loadContextMenusFrom(url: URL): this {
-        iterateDirent<ContextMenuData>(url, context => {
+        dirent.iterate<ContextMenuData>(url, context => {
             this.contexts[context.type].set(context.data.name, context);
             this.logger.debug(`Loaded context menu ${context.data.name}`);
         });
@@ -258,7 +208,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
     loadCommandsFrom(url: URL): this {
         const commandFiles = readdirSync(url, { withFileTypes: true });
         commandFiles.forEach(async file => {
-            if (file.isDirectory() && file.name.match(activeFolderRegex)) {
+            if (file.isDirectory() && dirent.isActive(file)) {
                 const subURL = new URL(file.name, url);
                 const command: SubcommandGroupData = (await import(`${subURL}/index.js`)).default;
                 if (command.permissions) command.data.setDefaultMemberPermissions(command.permissions.bitfield);
@@ -289,7 +239,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
                     }
                 }
 
-                const subcommandFiles = readdirSync(subURL, { withFileTypes: true }).filter(isActiveFile);
+                const subcommandFiles = readdirSync(subURL, { withFileTypes: true }).filter(dirent.isActive);
                 subcommandFiles.forEach(async subfile => {
                     if (subfile.name === "index.js") return;
                     const subcommand: SubcommandData = (await import(`${subURL}/${subfile.name}`)).default;
@@ -300,7 +250,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
 
                 this.commands.set(command.data.name, command);
                 this.logger.debug(`Loaded command ${command.data.name}`);
-            } else if (file.name.match(activeRegex)) {
+            } else if (dirent.isActive(file)) {
                 const command: CommandData = (await import(`${url}/${file.name}`)).default;
                 if (command.permissions) command.data.setDefaultMemberPermissions(command.permissions.bitfield);
         
@@ -424,7 +374,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
 
         if (isTestEnv && !guildId) {
             this.logger.warn("No guild ID was provided for the test environment!\nCommands will be registered globally in 5 seconds.");
-            sleep(5);
+            await thread.sleepAsync(5);
         }
 
         this.logger.debug("Checking if interactions need to be registered...");

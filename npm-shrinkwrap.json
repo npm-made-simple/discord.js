@@ -1,16 +1,17 @@
 {
     "name": "@made-simple/discord.js",
-    "version": "4.3.2",
+    "version": "4.3.3",
     "lockfileVersion": 3,
     "requires": true,
     "packages": {
         "": {
             "name": "@made-simple/discord.js",
-            "version": "4.3.2",
+            "version": "4.3.3",
             "license": "MIT",
             "dependencies": {
-                "@made-simple/logging": "^2.3.1",
-                "@made-simple/sqlite-store": "^1.2.1",
+                "@made-simple/logging": "^2.3.3",
+                "@made-simple/sqlite-store": "^1.2.2",
+                "@made-simple/util": "^1.1.0",
                 "discord.js": "^14.15.2"
             },
             "devDependencies": {
@@ -193,23 +194,29 @@
             }
         },
         "node_modules/@made-simple/logging": {
-            "version": "2.3.1",
-            "resolved": "https://registry.npmjs.org/@made-simple/logging/-/logging-2.3.1.tgz",
-            "integrity": "sha512-ZTwUS/8XwjK5YuCdYJeVRSQpCakmtZapWRw14xhEOxnLKSvS7G4TfGB+Uj6huAbV0DlHaoZ732bFaqpbqbbDyA==",
+            "version": "2.3.3",
+            "resolved": "https://registry.npmjs.org/@made-simple/logging/-/logging-2.3.3.tgz",
+            "integrity": "sha512-2iLKDXfiaC0n3CYgcAIRFEWofxo9xj3ybsbJ9afzXrNA7FSyc1NGZnEpmqX7JEeKTP/5zYJ+QO9Iifbsr4e18w==",
             "dependencies": {
+                "@made-simple/util": "^1.1.0",
                 "chalk": "^5.3.0",
                 "parsed-packages": "^1.1.0"
             }
         },
         "node_modules/@made-simple/sqlite-store": {
-            "version": "1.2.1",
-            "resolved": "https://registry.npmjs.org/@made-simple/sqlite-store/-/sqlite-store-1.2.1.tgz",
-            "integrity": "sha512-svYZ7oHFlO8d2MLIJMOVxZbRd4CuwMLEFweGCSr0f791inzHeCRTAJ9akiKc4fSYGSaxqqf6wURcGoaOgRnucA==",
+            "version": "1.2.2",
+            "resolved": "https://registry.npmjs.org/@made-simple/sqlite-store/-/sqlite-store-1.2.2.tgz",
+            "integrity": "sha512-p449TD8QcsRJ32G1zs/IL5dsTp8G69cEr5mhdV5JV9Y2cLHMGba6I5/rKKfGVONFWoKArf0fz12PjwVn8HkaXA==",
             "dependencies": {
                 "@keyv/sqlite": "^3.6.7",
-                "@made-simple/logging": "^2.3.1",
+                "@made-simple/logging": "^2.3.3",
                 "keyv": "^4.5.4"
             }
+        },
+        "node_modules/@made-simple/util": {
+            "version": "1.1.0",
+            "resolved": "https://registry.npmjs.org/@made-simple/util/-/util-1.1.0.tgz",
+            "integrity": "sha512-9pIfZOAOoVxNv9kjTbKxMNEiqMKKPx0OnjyBkijCU8VbyGUAjv4sypANcX0+38Q06nBxjcG8qyXdDBzSC0OOwA=="
         },
         "node_modules/@npmcli/fs": {
             "version": "1.1.1",
