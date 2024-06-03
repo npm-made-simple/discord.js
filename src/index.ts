@@ -23,6 +23,7 @@ import {
 import { LoggerBuilder, chalk } from "@made-simple/logging";
 import Store from "@made-simple/sqlite-store";
 
+import type { ChalkInstance } from "chalk";
 import { Dirent, readdirSync } from "node:fs";
 
 export interface ClientOptions extends Omit<DiscordClientOptions, "intents" | "partials"> {
@@ -451,6 +452,23 @@ export class Client<T extends {} = {}> extends DiscordClient {
         }
 
         return token;
+    }
+
+    /**
+     * Sets the logger for the client.
+     * @param {LoggerBuilder} logger The logger to use.
+     * @returns {this}
+     * 
+     * ```ts
+     * const logger = new LoggerBuilder("MyBot", chalk.green);
+     * client.setLogger(logger);
+     * client.logger.info("Hello, world!");
+     * // Prints: [MyBot] Hello, world!, in green
+     * ```
+     */
+    setLogger(logger: LoggerBuilder): this {
+        this.logger = logger;
+        return this;
     }
 }
 
