@@ -1,12 +1,12 @@
 {
     "name": "@made-simple/discord.js",
-    "version": "4.3.3",
+    "version": "4.3.4",
     "lockfileVersion": 3,
     "requires": true,
     "packages": {
         "": {
             "name": "@made-simple/discord.js",
-            "version": "4.3.3",
+            "version": "4.3.4",
             "license": "MIT",
             "dependencies": {
                 "@made-simple/logging": "^2.3.3",
