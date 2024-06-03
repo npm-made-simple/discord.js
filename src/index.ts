@@ -29,7 +29,7 @@ const logger = new TaggedLogger("discord.js", chalk.cyanBright);
 
 export interface ClientOptions extends Omit<DiscordClientOptions, "intents" | "partials"> {
     intents: (keyof typeof GatewayIntentBits | GatewayIntentBits)[];
-    partials: (keyof typeof Partials | Partials)[];
+    partials?: (keyof typeof Partials | Partials)[];
 }
 
 export type EmitListener<T extends keyof ClientEvents> = (client: Client, ...args: ClientEvents[T]) => Awaitable<void>;
@@ -153,6 +153,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
         }
 
         let partials: Partials[] = [];
+        if (!options.partials) options.partials = [];
         for (const partial of options.partials) {
             if (typeof partial === "string") partials.push(Partials[partial]);
             else partials.push(partial);
