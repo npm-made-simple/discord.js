@@ -1,16 +1,16 @@
 {
     "name": "@made-simple/discord.js",
-    "version": "4.3.4",
+    "version": "4.3.6",
     "lockfileVersion": 3,
     "requires": true,
     "packages": {
         "": {
             "name": "@made-simple/discord.js",
-            "version": "4.3.4",
+            "version": "4.3.6",
             "license": "MIT",
             "dependencies": {
-                "@made-simple/logging": "^2.3.3",
-                "@made-simple/sqlite-store": "^1.2.2",
+                "@made-simple/logging": "^2.3.4",
+                "@made-simple/sqlite-store": "^1.3.1",
                 "@made-simple/util": "^1.1.0",
                 "discord.js": "^14.15.2"
             },
@@ -194,9 +194,9 @@
             }
         },
         "node_modules/@made-simple/logging": {
-            "version": "2.3.3",
-            "resolved": "https://registry.npmjs.org/@made-simple/logging/-/logging-2.3.3.tgz",
-            "integrity": "sha512-2iLKDXfiaC0n3CYgcAIRFEWofxo9xj3ybsbJ9afzXrNA7FSyc1NGZnEpmqX7JEeKTP/5zYJ+QO9Iifbsr4e18w==",
+            "version": "2.3.4",
+            "resolved": "https://registry.npmjs.org/@made-simple/logging/-/logging-2.3.4.tgz",
+            "integrity": "sha512-VjCDHqOE6Kr52HcKo38s51d+pvBkiq1SchRBtzlbKE/lkmJYOptZ6InGFKcTuITIUtRTFTnCv7Fhlc5UXn2l8A==",
             "dependencies": {
                 "@made-simple/util": "^1.1.0",
                 "chalk": "^5.3.0",
@@ -204,12 +204,12 @@
             }
         },
         "node_modules/@made-simple/sqlite-store": {
-            "version": "1.2.2",
-            "resolved": "https://registry.npmjs.org/@made-simple/sqlite-store/-/sqlite-store-1.2.2.tgz",
-            "integrity": "sha512-p449TD8QcsRJ32G1zs/IL5dsTp8G69cEr5mhdV5JV9Y2cLHMGba6I5/rKKfGVONFWoKArf0fz12PjwVn8HkaXA==",
+            "version": "1.3.1",
+            "resolved": "https://registry.npmjs.org/@made-simple/sqlite-store/-/sqlite-store-1.3.1.tgz",
+            "integrity": "sha512-d+Ni7pJ83ElsXiDwR1Ll58rGBWaSRXrY0SEfOkanC2qtXbHTb2e9LyEPPKMKq1BoSAwUnveayVR0YyvdJpO+pQ==",
             "dependencies": {
                 "@keyv/sqlite": "^3.6.7",
-                "@made-simple/logging": "^2.3.3",
+                "@made-simple/logging": "^2.3.4",
                 "keyv": "^4.5.4"
             }
         },
