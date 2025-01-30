@@ -1,12 +1,32 @@
-import { Client as DiscordClient, Events, GatewayIntentBits, Partials, REST, Routes, } from "discord.js";
+import {
+    Client as DiscordClient,
+    Events,
+    GatewayIntentBits,
+    Partials,
+    REST,
+    Routes,
+    type ApplicationCommandType,
+    type AutocompleteInteraction,
+    type Awaitable,
+    type ChatInputCommandInteraction,
+    type ClientEvents,
+    type CommandInteraction,
+    type ContextMenuCommandBuilder,
+    type ClientOptions as DiscordClientOptions,
+    type InteractionReplyOptions,
+    type InteractionResponse,
+    type Message,
+    type MessagePayload,
+    type PermissionsBitField,
+    type SlashCommandBuilder,
+    type SlashCommandOptionsOnlyBuilder,
+    type SlashCommandSubcommandBuilder
+} from "discord.js";
 
 import { LoggerBuilder, chalk } from "@made-simple/logging";
 import { dirent, thread } from "@made-simple/util";
 import Store from "@made-simple/sqlite-store";
-
 import { readdirSync } from "node:fs";
-
-import type { ApplicationCommandType, Awaitable, ClientEvents, CommandInteraction, ContextMenuCommandBuilder, ClientOptions as DiscordClientOptions, InteractionReplyOptions, InteractionResponse, Message, MessagePayload, PermissionsBitField, SlashCommandBuilder, SlashCommandOptionsOnlyBuilder, SlashCommandSubcommandBuilder } from "discord.js";
 
 export interface ClientOptions extends Omit<DiscordClientOptions, "intents" | "partials"> {
     intents: (keyof typeof GatewayIntentBits | GatewayIntentBits)[];
@@ -14,6 +34,7 @@ export interface ClientOptions extends Omit<DiscordClientOptions, "intents" | "p
 }
 
 export type EmitListener<T extends keyof ClientEvents> = (client: Client, ...args: ClientEvents[T]) => Awaitable<void>;
+export type TypedListener<T> = (client: Client, ...args: T[]) => Awaitable<void>;
 
 export interface EventData<T extends keyof ClientEvents> {
     name: T;
@@ -24,19 +45,22 @@ export interface EventData<T extends keyof ClientEvents> {
 export interface CommandData {
     data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder;
     permissions?: Readonly<PermissionsBitField>;
-    execute: EmitListener<Events.InteractionCreate>;
+    execute: TypedListener<ChatInputCommandInteraction>;
+    autocomplete?: TypedListener<AutocompleteInteraction>;
 }
 
 export interface SubcommandGroupData {
     data: SlashCommandBuilder;
     permissions?: Readonly<PermissionsBitField>;
     subcommands?: Map<string, SubcommandData>;
-    execute?: EmitListener<Events.InteractionCreate>;
+    execute?: TypedListener<ChatInputCommandInteraction>;
+    autocomplete?: TypedListener<AutocompleteInteraction>;
 }
 
 export interface SubcommandData {
     data: SlashCommandSubcommandBuilder;
-    execute: EmitListener<Events.InteractionCreate>;
+    execute: TypedListener<ChatInputCommandInteraction>;
+    autocomplete?: TypedListener<AutocompleteInteraction>;
 }
 
 export interface ContextMenuData<T extends keyof typeof ApplicationCommandType = keyof typeof ApplicationCommandType> {
@@ -344,6 +368,17 @@ export class Client<T extends {} = {}> extends DiscordClient {
                         ephemeral: true
                     });
                 }
+            } else if (interaction.isAutocomplete()) {
+                const { commandName } = interaction;
+                const command = client.commands.get(commandName);
+
+                if (!command || !command.autocomplete) return;
+
+                try {
+                    await command.autocomplete(client, interaction);
+                } catch (error) {
+                    this.logger.error(error);
+                }
             }
         });
 
@@ -427,3 +462,4 @@ export class Client<T extends {} = {}> extends DiscordClient {
 }
 
 export * from "discord.js";
+export { SlashCommandBuilder };
