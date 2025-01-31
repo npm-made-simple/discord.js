@@ -5,6 +5,7 @@ import {
     Partials,
     REST,
     Routes,
+    SlashCommandBuilder,
     type ApplicationCommandType,
     type AutocompleteInteraction,
     type Awaitable,
@@ -18,7 +19,6 @@ import {
     type Message,
     type MessagePayload,
     type PermissionsBitField,
-    type SlashCommandBuilder,
     type SlashCommandOptionsOnlyBuilder,
     type SlashCommandSubcommandBuilder
 } from "discord.js";
