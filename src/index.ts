@@ -2,6 +2,7 @@ import {
     Client as DiscordClient,
     Events,
     GatewayIntentBits,
+    MessageFlags,
     Partials,
     REST,
     Routes,
@@ -191,7 +192,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
      * ```
      */
     loadEventsFrom(url: URL): this {
-        dirent.iterate<EventData<keyof ClientEvents>>(url, event => {
+        dirent.iterateOver<EventData<keyof ClientEvents>>(url, event => {
             this[event.once ? "once" : "on"](event.name, event.execute);
             this.logger.debug(`Loaded event ${event.name}`);
         });
@@ -210,7 +211,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
      * ```
      */
     loadContextMenusFrom(url: URL): this {
-        dirent.iterate<ContextMenuData>(url, context => {
+        dirent.iterateOver<ContextMenuData>(url, context => {
             this.contexts[context.type].set(context.data.name, context);
             this.logger.debug(`Loaded context menu ${context.data.name}`);
         });
@@ -232,7 +233,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
     loadCommandsFrom(url: URL): this {
         const commandFiles = readdirSync(url, { withFileTypes: true });
         commandFiles.forEach(async file => {
-            if (file.isDirectory() && dirent.isActive(file)) {
+            if (file.isDirectory() && dirent.isValidRegex(file)) {
                 const subURL = new URL(file.name, url);
                 const command: SubcommandGroupData = (await import(`${subURL}/index.js`)).default;
                 if (command.permissions) command.data.setDefaultMemberPermissions(command.permissions.bitfield);
@@ -246,7 +247,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
                     if (!subcommand) {
                         await reply(interaction, {
                             content: `Could not find subcommand **${subcommandName}**!`,
-                            ephemeral: true
+                            flags: [ MessageFlags.Ephemeral ]
                         });
 
                         return;
@@ -258,12 +259,12 @@ export class Client<T extends {} = {}> extends DiscordClient {
                         this.logger.error(error);
                         await reply(interaction, {
                             content: "There was an error while executing this command!",
-                            ephemeral: true
+                            flags: [ MessageFlags.Ephemeral ]
                         });
                     }
                 }
 
-                const subcommandFiles = readdirSync(subURL, { withFileTypes: true }).filter(dirent.isActive);
+                const subcommandFiles = readdirSync(subURL, { withFileTypes: true }).filter(dirent.isValidRegex);
                 subcommandFiles.forEach(async subfile => {
                     if (subfile.name === "index.js") return;
                     const subcommand: SubcommandData = (await import(`${subURL}/${subfile.name}`)).default;
@@ -274,7 +275,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
 
                 this.commands.set(command.data.name, command);
                 this.logger.debug(`Loaded command ${command.data.name}`);
-            } else if (dirent.isActive(file)) {
+            } else if (dirent.isValidRegex(file)) {
                 const command: CommandData = (await import(`${url}/${file.name}`)).default;
                 if (command.permissions) command.data.setDefaultMemberPermissions(command.permissions.bitfield);
         
@@ -309,7 +310,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
                 if (!command) {
                     await interaction.reply({
                         content: `Could not find command **${commandName}**!`,
-                        ephemeral: true
+                        flags: [ MessageFlags.Ephemeral ]
                     });
 
                     return;
@@ -318,7 +319,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
                 if (command.permissions && !(member?.permissions as Readonly<PermissionsBitField>).has(command.permissions)) {
                     await interaction.reply({
                         content: "You do not have permission to use this command!",
-                        ephemeral: true
+                        flags: [ MessageFlags.Ephemeral ]
                     });
 
                     return;
@@ -330,7 +331,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
                     this.logger.error(error);
                     await reply(interaction, {
                         content: "There was an error while executing this command!",
-                        ephemeral: true
+                        flags: [ MessageFlags.Ephemeral ]
                     });
                 }
             } else if (interaction.isContextMenuCommand()) {
@@ -344,7 +345,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
                 if (!context) {
                     await interaction.reply({
                         content: `Could not find context menu **${commandName}**!`,
-                        ephemeral: true
+                        flags: [ MessageFlags.Ephemeral ]
                     });
                     
                     return;
@@ -353,7 +354,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
                 if (context.permissions && !(member?.permissions as Readonly<PermissionsBitField>).has(context.permissions)) {
                     await interaction.reply({
                         content: "You do not have permission to use this context menu!",
-                        ephemeral: true
+                        flags: [ MessageFlags.Ephemeral ]
                     });
 
                     return;
@@ -365,7 +366,7 @@ export class Client<T extends {} = {}> extends DiscordClient {
                     this.logger.error(error);
                     await reply(interaction, {
                         content: "There was an error while executing this context menu!",
-                        ephemeral: true
+                        flags: [ MessageFlags.Ephemeral ]
                     });
                 }
             } else if (interaction.isAutocomplete()) {
