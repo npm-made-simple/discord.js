@@ -10,9 +10,9 @@ export interface ClientOptions extends Omit<DiscordClientOptions, "intents" | "p
     partials?: (keyof typeof Partials | Partials)[];
 }
 
-export type EmitListener<T extends keyof ClientEvents> = (client: Client, ...args: ClientEvents[T]) => Awaitable<void>;
-export type TypedListener<T> = (client: Client, ...args: T[]) => Awaitable<void>;
-export type InteractionWithArgsListener<T> = (client: Client, interaction: T, ...args: string[]) => Awaitable<void>;
+export type EmitListener<T extends keyof ClientEvents> = (client: Client, ...args: ClientEvents[T]) => Awaitable<void | unknown>;
+export type TypedListener<T> = (client: Client, ...args: T[]) => Awaitable<void | unknown>;
+export type InteractionWithArgsListener<T> = (client: Client, interaction: T, ...args: string[]) => Awaitable<void | unknown>;
 
 export interface EventData<T extends keyof ClientEvents> {
     name: T;
