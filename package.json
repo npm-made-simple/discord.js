@@ -1,7 +1,7 @@
 {
     "name": "@made-simple/discord.js",
     "private": false,
-    "version": "5.0.1",
+    "version": "5.0.2",
     "types": "./dist/index.d.ts",
     "exports": "./dist/index.js",
     "author": {
@@ -19,12 +19,13 @@
     "dependencies": {
         "@made-simple/sqlite-store": "^1.4.2",
         "@made-simple/logging": "^2.5.0",
-        "@made-simple/util": "^2.1.0",
+        "@made-simple/util": "^2.2.0",
         "discord.js": "^14.19.3"
     },
     "devDependencies": {
-        "@types/node": "^22.15.29",
-        "typescript": "^5.8.3",
+        "@types/node": "^24.3.0",
+        "typescript": "^5.9.2",
+        "ts-node": "^10.9.2",
         "tslib": "^2.8.1"
     },
     "repository": {

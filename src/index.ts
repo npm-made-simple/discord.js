@@ -1,7 +1,7 @@
 import { ApplicationCommandType, AutocompleteInteraction, Awaitable, ChatInputCommandInteraction, Client as DiscordClient, ClientEvents, ClientOptions as DiscordClientOptions, CommandInteraction, ContextMenuCommandBuilder, Events, GatewayIntentBits, InteractionReplyOptions, InteractionResponse, Message, MessageFlags, MessagePayload, ModalBuilder, Partials, PermissionsBitField, REST, Routes, SlashCommandBuilder, SlashCommandOptionsOnlyBuilder, SlashCommandSubcommandBuilder, SlashCommandSubcommandGroupBuilder, InteractionEditReplyOptions, AnySelectMenuInteraction, ButtonInteraction, ModalSubmitInteraction } from "discord.js";
 
 import { LoggerBuilder, chalk } from "@made-simple/logging";
-import { dirent, thread } from "@made-simple/util";
+import { dirent, object, thread } from "@made-simple/util";
 import Store from "@made-simple/sqlite-store";
 import { readdirSync } from "node:fs";
 
@@ -502,7 +502,9 @@ export class Client<T extends {} = {}> extends DiscordClient {
         const commands = Array.from(this.commands.values()).map(command => command.data.toJSON());
         const userContexts = Array.from(this.contextMenus.User.values()).map(context => context.data.toJSON());
         const messageContexts = Array.from(this.contextMenus.Message.values()).map(context => context.data.toJSON());
-        const all = [...commands, ...userContexts, ...messageContexts];
+        const all = [...commands, ...userContexts, ...messageContexts]
+            .map(object.deepSort)
+            .sort((a, b) => a.name.localeCompare(b.name));
 
         const parsedString = JSON.stringify(all, null, 4)
             .replace(/"([^"]+)":/g, "$1:")
