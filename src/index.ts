@@ -49,6 +49,12 @@ export interface SubcommandIndexData {
     interface: "SubcommandIndexData";
 }
 
+export interface UnknownCommandData {
+    data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder;
+    permissions?: Readonly<PermissionsBitField>;
+    interface: "CommandData" | "SubcommandIndexData";
+}
+
 export interface SubcommandGroupData {
     data: SlashCommandSubcommandGroupBuilder;
     subcommands?: Map<string, SubcommandData>;
@@ -113,6 +119,24 @@ export function ModalData(data: Omit<ModalData, "interface">): ModalData {
 export function reply(interaction: CommandInteraction, options: string | MessagePayload | InteractionReplyOptions | InteractionEditReplyOptions): Promise<Message<boolean>> | Promise<InteractionResponse<boolean>> {
     if (interaction.deferred || interaction.replied) return interaction.editReply(options as string | MessagePayload | InteractionEditReplyOptions);
     return interaction.reply(options as string | MessagePayload | InteractionReplyOptions);
+}
+
+/**
+ * Type casts an unknown command data into checking if it is of type CommandData.
+ * @param {UnknownCommandData} data The command data.
+ * @returns {boolean}
+ */
+export function isCommandData(data: UnknownCommandData): data is CommandData {
+    return data.interface === "CommandData";
+}
+
+/**
+ * Type casts an unknown command data into checking if it is of type SubcommandIndexData.
+ * @param {UnknownCommandData} data the Command data
+ * @returns {boolean}
+ */
+export function isSubcommandIndexData(data: UnknownCommandData): data is SubcommandIndexData {
+    return data.interface === "SubcommandIndexData";
 }
 
 /**
@@ -376,13 +400,13 @@ export class Client<T extends {} = {}> extends DiscordClient {
                 const subcommand = options.getSubcommand(false);
                 const group = options.getSubcommandGroup(false);
 
-                const command = client.commands.get(commandName) as SubcommandIndexData;
+                const command = client.commands.get(commandName) as UnknownCommandData;
                 let autocomplete: TypedListener<AutocompleteInteraction> | undefined;
                 if (!command) return;
-                if (subcommand) {
+                if (subcommand && isSubcommandIndexData(command)) {
                     if (group) autocomplete = command.subcommandGroups?.get(group)?.subcommands?.get(subcommand)?.autocomplete;
                     else autocomplete = command.subcommands?.get(subcommand)?.autocomplete;
-                }
+                } else if (isCommandData(command)) autocomplete = command.autocomplete;
 
                 if (!autocomplete) {
                     await interaction.respond([{
